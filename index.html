@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="styles.css">
     <meta name="description" content="Howdy World Coding - Practical programming for Texas ranch kids, 4-H members, and future ag-tech builders.">
     <title>Howdy World Coding - Coding for the Ranch</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" href="https://via.placeholder.com/32x32?text=🤠" type="image/x-icon">
-    
+
     <style>
         :root {
             --primary-green: #2c5f2d;
@@ -17,12 +17,12 @@
             --bg-light: #f4f4f4;
             --text-light: #333;
         }
-        
+
         [data-theme="dark"] {
             --bg-light: #1a1a1a;
             --text-light: #e0e0e0;
         }
-        
+
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -32,19 +32,32 @@
             line-height: 1.6;
             transition: background 0.3s, color 0.3s;
         }
-        
+
         header {
-            background: linear-gradient(var(--primary-green), #1e3f1e);
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
+            padding: 0;
         }
-        
-.hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), 
-                url('images/cyberskull.jpg') center/cover no-repeat; 
-}
-        
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)),
+                        url('images/cyberskull.jpg') center/cover no-repeat;
+            min-height: 420px;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1,
+        .hero .tagline,
+        .hero p {
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .cta {
             background: var(--accent-yellow);
             color: #333;
@@ -56,40 +69,40 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .cta:hover {
             transform: scale(1.05);
             background: #ffdd33;
         }
-        
+
         section {
             padding: 70px 20px;
             max-width: 1100px;
             margin: 0 auto;
         }
-        
+
         .about {
             background: white;
         }
-        
+
         [data-theme="dark"] .about {
             background: #2a2a2a;
         }
-        
+
         footer {
             background: #222;
             color: white;
             text-align: center;
             padding: 40px 20px;
         }
-        
+
         .social-links a {
             color: var(--accent-yellow);
             margin: 0 15px;
             text-decoration: none;
             font-size: 1.1rem;
         }
-        
+
         /* Dark mode toggle button */
         .theme-toggle {
             position: fixed;
@@ -105,7 +118,7 @@
             font-size: 1.4rem;
             z-index: 100;
         }
-        
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .tagline { font-size: 1.3rem; }
@@ -127,7 +140,7 @@
     <section class="about">
         <h2 style="text-align:center;">What is Howdy World?</h2>
         <p style="font-size:1.25rem; line-height:1.7; text-align:center; max-width:800px; margin:0 auto;">
-            We're building a free resource where Texas youth learn real coding skills through projects that matter on the farm and ranch. 
+            We're building a free resource where Texas youth learn real coding skills through projects that matter on the farm and ranch.
             From Python scripts that track cattle weights to simple sensor dashboards — no boring examples, just useful tools with a big Texas twist.
         </p>
     </section>
@@ -135,18 +148,15 @@
     <section style="background:var(--primary-green); color:white; text-align:center;">
         <h2>Start Learning Today</h2>
         <p>Watch the latest videos • Follow along with tutorials</p>
-        <button class="cta" style="background:white; color:var(--primary-green);" onclick="window.open('https://youtube.com/@howdy-world-coding', '_blank')">
-            Go to YouTube Channel
-        </button>
+        <button class="cta" onclick="window.location.href='https://youtube.com/@howdy-world-coding'">Go to YouTube Channel</button>
     </section>
 
     <footer>
-        <p>&copy; 2026 Howdy World Coding • <a href="https://howdy-world.com" style="color:var(--accent-yellow);">howdy-world.com</a></p>
+        <p>© 2026 Howdy World Coding • <a href="https://howdy-world.com" style="color:var(--accent-yellow);">howdy-world.com</a></p>
         <p>Made for Texas kids who want to code on the land.</p>
-        
-        <div class="social-links" style="margin-top: 20px;">
-            <a href="https://youtube.com/@howdy-world-coding" target="_blank">YouTube</a>
-            <a href="https://github.com/zachmofo" target="_blank">GitHub</a>
+        <div class="social-links">
+            <a href="https://youtube.com/@howdy-world-coding">YouTube</a>
+            <a href="https://github.com/zachmofo">GitHub</a>
         </div>
     </footer>
 
@@ -156,7 +166,6 @@
             const currentTheme = body.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             body.setAttribute('data-theme', newTheme);
-            
             // Save preference
             localStorage.setItem('theme', newTheme);
         }
