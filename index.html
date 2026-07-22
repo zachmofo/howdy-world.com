@@ -13,15 +13,23 @@
         :root {
             --primary-green: #2c5f2d;
             --accent-yellow: #ffcc00;
+            --bg-light: #f4f4f4;
+            --text-light: #333;
+        }
+        
+        [data-theme="dark"] {
+            --bg-light: #1a1a1a;
+            --text-light: #e0e0e0;
         }
         
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f4f4f4;
-            color: #333;
+            background: var(--bg-light);
+            color: var(--text-light);
             line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
         }
         
         header {
@@ -31,20 +39,9 @@
             padding: 100px 20px;
         }
         
-        .hero {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        h1 {
-            font-size: 3.2rem;
-            margin: 0 0 20px 0;
-        }
-        
-        .tagline {
-            font-size: 1.6rem;
-            margin: 20px 0;
-        }
+        .hero { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 3.2rem; margin: 0 0 20px 0; }
+        .tagline { font-size: 1.6rem; margin: 20px 0; }
         
         .cta {
             background: var(--accent-yellow);
@@ -73,6 +70,10 @@
             background: white;
         }
         
+        [data-theme="dark"] .about {
+            background: #2a2a2a;
+        }
+        
         footer {
             background: #222;
             color: white;
@@ -81,10 +82,26 @@
         }
         
         .social-links a {
-            color: #ffcc00;
+            color: var(--accent-yellow);
             margin: 0 15px;
             text-decoration: none;
             font-size: 1.1rem;
+        }
+        
+        /* Dark mode toggle button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.4rem;
+            z-index: 100;
         }
         
         @media (max-width: 768px) {
@@ -94,6 +111,8 @@
     </style>
 </head>
 <body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
     <header>
         <div class="hero">
             <h1>🤠 Howdy World Coding</h1>
@@ -123,12 +142,30 @@
         <p>&copy; 2026 Howdy World Coding • <a href="https://howdy-world.com" style="color:var(--accent-yellow);">howdy-world.com</a></p>
         <p>Made for Texas kids who want to code on the land.</p>
         
-        <!-- Social Links - you can populate these -->
         <div class="social-links" style="margin-top: 20px;">
             <a href="#">YouTube</a>
             <a href="https://github.com/zachmofo">GitHub</a>
-            <!-- Add more as needed -->
         </div>
     </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            
+            // Save preference
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+            }
+        };
+    </script>
 </body>
 </html>
