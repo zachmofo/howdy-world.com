@@ -1,48 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Howdy World Coding - Coding for the Ranch</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
-    header { background: linear-gradient(#2c5f2d, #1e3f1e); color: white; text-align: center; padding: 80px 20px; }
-    .hero { max-width: 800px; margin: 0 auto; }
-    h1 { font-size: 3rem; margin: 0; }
-    .tagline { font-size: 1.5rem; margin: 20px 0; }
-    .cta { background: #ffcc00; color: #333; padding: 15px 30px; font-size: 1.2rem; border: none; border-radius: 8px; cursor: pointer; }
-    section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
-    .about { background: white; }
-    footer { background: #333; color: white; text-align: center; padding: 30px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Howdy World Coding - Practical programming for Texas ranch kids, 4-H members, and future ag-tech builders.">
+    <title>Howdy World Coding - Coding for the Ranch</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://via.placeholder.com/32x32?text=🤠" type="image/x-icon">
+    
+    <style>
+        :root {
+            --primary-green: #2c5f2d;
+            --accent-yellow: #ffcc00;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(var(--primary-green), #1e3f1e);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin: 0 0 20px 0;
+        }
+        
+        .tagline {
+            font-size: 1.6rem;
+            margin: 20px 0;
+        }
+        
+        .cta {
+            background: var(--accent-yellow);
+            color: #333;
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta:hover {
+            transform: scale(1.05);
+            background: #ffdd33;
+        }
+        
+        section {
+            padding: 70px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .about {
+            background: white;
+        }
+        
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .social-links a {
+            color: #ffcc00;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .tagline { font-size: 1.3rem; }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="hero">
-      <h1>🤠 Howdy World Coding</h1>
-      <p class="tagline">Learning to code... Texas ranch style.</p>
-      <p>Practical programming for farm kids, 4-H members, and future ag-tech builders.</p>
-      <button class="cta" onclick="window.location.href='#subscribe'">Subscribe on YouTube</button>
-    </div>
-  </header>
+    <header>
+        <div class="hero">
+            <h1>🤠 Howdy World Coding</h1>
+            <p class="tagline">Learning to code... Texas ranch style.</p>
+            <p>Practical programming for farm kids, 4-H members, and future ag-tech builders.</p>
+            <button class="cta" onclick="window.location.href='#subscribe'">Join the Movement</button>
+        </div>
+    </header>
 
-  <section class="about">
-    <h2 style="text-align:center;">What is Howdy World?</h2>
-    <p style="font-size:1.2rem; line-height:1.6; text-align:center; max-width:700px; margin:0 auto;">
-      We're building a free resource where Texas youth learn real coding skills through projects that matter on the farm and ranch. 
-      From Python scripts that track cattle weights to simple sensor dashboards — no boring examples, just useful tools with a big Texas twist.
-    </p>
-  </section>
+    <section class="about">
+        <h2 style="text-align:center;">What is Howdy World?</h2>
+        <p style="font-size:1.25rem; line-height:1.7; text-align:center; max-width:800px; margin:0 auto;">
+            We're building a free resource where Texas youth learn real coding skills through projects that matter on the farm and ranch. 
+            From Python scripts that track cattle weights to simple sensor dashboards — no boring examples, just useful tools with a big Texas twist.
+        </p>
+    </section>
 
-  <section style="background:#2c5f2d; color:white; text-align:center;">
-    <h2>Start Learning Today</h2>
-    <p>Watch the latest videos • Follow along with tutorials</p>
-    <button class="cta" style="background:white; color:#2c5f2d;" onclick="window.open('https://youtube.com/@howdyworld', '_blank')">Go to YouTube Channel</button>
-  </section>
+    <section style="background:var(--primary-green); color:white; text-align:center;">
+        <h2>Start Learning Today</h2>
+        <p>Watch the latest videos • Follow along with tutorials</p>
+        <button class="cta" style="background:white; color:var(--primary-green);" onclick="window.open('https://youtube.com/@howdyworld', '_blank')">
+            Go to YouTube Channel
+        </button>
+    </section>
 
-  <footer>
-    <p>&copy; 2026 Howdy World Coding • <a href="https://howdy-world.com" style="color:#ffcc00;">howdy-world.com</a></p>
-    <p>Made for Texas kids who want to code on the land.</p>
-  </footer>
+    <footer>
+        <p>&copy; 2026 Howdy World Coding • <a href="https://howdy-world.com" style="color:var(--accent-yellow);">howdy-world.com</a></p>
+        <p>Made for Texas kids who want to code on the land.</p>
+        
+        <!-- Social Links - you can populate these -->
+        <div class="social-links" style="margin-top: 20px;">
+            <a href="#">YouTube</a>
+            <a href="https://github.com/zachmofo">GitHub</a>
+            <!-- Add more as needed -->
+        </div>
+    </footer>
 </body>
 </html>
