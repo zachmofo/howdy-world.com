@@ -1,56 +1,74 @@
 <div class="lum-oh-widget-container" id="lum-oh-widget-root">
     <div class="lum-oh-header">
-        <div class="lum-oh-header-title"> <span class="lum-oh-icon">🌐</span>
+        <div class="lum-oh-header-title"> 
+            <span class="lum-oh-icon">🌐</span>
             <h3>LumApps Global Office Hub</h3>
         </div>
         <p class="lum-oh-subtitle">Connect seamlessly with colleagues across our global offices</p>
-    </div> <!-- Office Selector Tabs -->
-    <div class="lum-oh-tabs" id="lum-oh-office-tabs"> <button class="lum-oh-tab-btn lum-oh-active"
-            data-office="paris">Paris (HQ)</button> <button class="lum-oh-tab-btn" data-office="austin">Austin</button>
-        <button class="lum-oh-tab-btn" data-office="london">London</button> <button class="lum-oh-tab-btn"
-            data-office="tokyo">Tokyo</button> </div> <!-- Main Display Grid -->
-    <div class="lum-oh-grid"> <!-- Left Column: Current Status -->
-        <div class="lum-oh-card lum-oh-status-card">
+    </div> 
+
+    <!-- Office Selector Tabs -->
+    <div class="lum-oh-tabs" id="lum-oh-office-tabs"> 
+        <button class="lum-oh-tab-btn lum-oh-active" data-office="paris">Paris (HQ)</button> 
+        <button class="lum-oh-tab-btn" data-office="austin">Austin</button>
+        <button class="lum-oh-tab-btn" data-office="london">London</button> 
+        <button class="lum-oh-tab-btn" data-office="tokyo">Tokyo</button> 
+    </div> 
+
+    <!-- Main Display Grid -->
+    <div class="lum-oh-grid"> 
+        <!-- Left Column: Current Status (With Dynamic Background Image) -->
+        <div class="lum-oh-card lum-oh-status-card" id="lum-oh-status-card">
             <div class="lum-oh-card-header">
-                <h4 id="lum-oh-selected-name">Paris Office</h4> <span class="lum-oh-status-badge"
-                    id="lum-oh-work-status">Working Hours</span>
+                <h4 id="lum-oh-selected-name">Paris Office</h4> 
+                <span class="lum-oh-status-badge" id="lum-oh-work-status">Working Hours</span>
             </div>
             <div class="lum-oh-time-display">
                 <div class="lum-oh-clock" id="lum-oh-local-clock">00:00:00</div>
                 <div class="lum-oh-date" id="lum-oh-local-date">Monday, January 1</div>
-            </div> <!-- Weather Sub-panel -->
+            </div> 
+            
+            <!-- Weather Sub-panel -->
             <div class="lum-oh-weather-panel">
                 <div class="lum-oh-loading-spinner" id="lum-oh-weather-loader">
                     <div class="lum-oh-spinner"></div> <span>Fetching local weather...</span>
                 </div>
-                <div class="lum-oh-weather-data lum-oh-hidden" id="lum-oh-weather-content"> <span
-                        class="lum-oh-weather-icon" id="lum-oh-weather-icon">☀️</span>
-                    <div class="lum-oh-weather-info"> <span class="lum-oh-temp" id="lum-oh-weather-temp">--°C</span>
-                        <span class="lum-oh-desc" id="lum-oh-weather-desc">Clear sky</span> </div>
+                <div class="lum-oh-weather-data lum-oh-hidden" id="lum-oh-weather-content"> 
+                    <span class="lum-oh-weather-icon" id="lum-oh-weather-icon">☀️</span>
+                    <div class="lum-oh-weather-info"> 
+                        <span class="lum-oh-temp" id="lum-oh-weather-temp">--°C</span>
+                        <span class="lum-oh-desc" id="lum-oh-weather-desc">Clear sky</span> 
+                    </div>
                 </div>
-                <div class="lum-oh-error-state lum-oh-hidden" id="lum-oh-weather-error"> ⚠️ Weather currently
-                    unavailable </div>
+                <div class="lum-oh-error-state lum-oh-hidden" id="lum-oh-weather-error"> ⚠️ Weather currently unavailable </div>
             </div>
-        </div> <!-- Right Column: Interactive Meeting Planner -->
+        </div> 
+
+        <!-- Right Column: Interactive Meeting Planner -->
         <div class="lum-oh-card lum-oh-planner-card">
             <h4>Timezone Overlap Planner</h4>
             <p class="lum-oh-card-desc">Drag the slider to match your local time with the selected office.</p>
             <div class="lum-oh-planner-slider-container">
-                <div class="lum-oh-slider-labels"> <span>12 AM</span> <span>6 AM</span> <span>12 PM</span> <span>6
-                        PM</span> <span>11 PM</span> </div> <input type="range" min="0" max="23" value="12"
-                    class="lum-oh-slider" id="lum-oh-time-slider">
+                <div class="lum-oh-slider-labels"> 
+                    <span>12 AM</span> <span>6 AM</span> <span>12 PM</span> <span>6 PM</span> <span>11 PM</span> 
+                </div> 
+                <input type="range" min="0" max="23" value="12" class="lum-oh-slider" id="lum-oh-time-slider">
             </div>
             <div class="lum-oh-comparison-grid">
-                <div class="lum-oh-comparison-row"> <span class="lum-oh-comp-label">Your Time (Local):</span> <span
-                        class="lum-oh-comp-val" id="lum-oh-user-time-val">12:00 PM</span> </div>
-                <div class="lum-oh-comparison-row"> <span class="lum-oh-comp-label" id="lum-oh-target-label">Paris
-                        Time:</span> <span class="lum-oh-comp-val" id="lum-oh-target-time-val">12:00 PM</span> </div>
+                <div class="lum-oh-comparison-row"> 
+                    <span class="lum-oh-comp-label">Your Time (Local):</span> 
+                    <span class="lum-oh-comp-val" id="lum-oh-user-time-val">12:00 PM</span> 
+                </div>
+                <div class="lum-oh-comparison-row"> 
+                    <span class="lum-oh-comp-label" id="lum-oh-target-label">Paris Time:</span> 
+                    <span class="lum-oh-comp-val" id="lum-oh-target-time-val">12:00 PM</span> 
+                </div>
             </div>
-            <div class="lum-oh-overlap-indicator" id="lum-oh-overlap-alert"> 🟢 Excellent time to schedule a call!
-            </div>
+            <div class="lum-oh-overlap-indicator" id="lum-oh-overlap-alert"> 🟢 Excellent time to schedule a call! </div>
         </div>
     </div>
 </div>
+
 <style>
     /* Strict Namespacing to prevent CSS leaks into LumApps Intranet */
     :root {
@@ -179,12 +197,37 @@
         margin: 0 0 16px 0;
     }
 
-    /* Status Card Specifics */
+    /* Status Card Background Styling */
     .lum-oh-status-card {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 240px;
+        min-height: 280px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        overflow: hidden;
+        transition: background-image 0.3s ease-in-out;
+        color: #ffffff;
+    }
+
+    /* Dark gradient overlay for text readability */
+    .lum-oh-status-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.55) 100%);
+        z-index: 1;
+    }
+
+    /* Keep card content above the background overlay */
+    .lum-oh-status-card > * {
+        position: relative;
+        z-index: 2;
     }
 
     .lum-oh-card-header {
@@ -196,6 +239,7 @@
 
     .lum-oh-card-header h4 {
         margin: 0;
+        color: #ffffff;
     }
 
     .lum-oh-status-badge {
@@ -207,13 +251,15 @@
     }
 
     .lum-oh-status-badge.lum-oh-online {
-        background-color: rgba(16, 185, 129, 0.15);
-        color: var(--lum-oh-success);
+        background-color: rgba(16, 185, 129, 0.25);
+        color: #34d399;
+        border: 1px solid rgba(52, 211, 153, 0.3);
     }
 
     .lum-oh-status-badge.lum-oh-offline {
-        background-color: rgba(239, 68, 68, 0.15);
-        color: var(--lum-oh-danger);
+        background-color: rgba(239, 68, 68, 0.25);
+        color: #f87171;
+        border: 1px solid rgba(248, 113, 113, 0.3);
     }
 
     .lum-oh-time-display {
@@ -221,21 +267,22 @@
     }
 
     .lum-oh-clock {
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 700;
         letter-spacing: -1px;
-        color: var(--lum-oh-brand-color);
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     }
 
     .lum-oh-date {
         font-size: 0.85rem;
-        color: var(--lum-oh-text-muted);
+        color: #cbd5e1;
         margin-top: 4px;
     }
 
     /* Weather Panel */
     .lum-oh-weather-panel {
-        border-top: 1px solid var(--lum-oh-border-color);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
         padding-top: 15px;
         min-height: 60px;
         display: flex;
@@ -260,11 +307,12 @@
     .lum-oh-temp {
         font-size: 1.1rem;
         font-weight: 700;
+        color: #ffffff;
     }
 
     .lum-oh-desc {
         font-size: 0.75rem;
-        color: var(--lum-oh-text-muted);
+        color: #cbd5e1;
         text-transform: capitalize;
     }
 
@@ -336,8 +384,16 @@
         text-align: center;
         font-size: 0.8rem;
         font-weight: 600;
-        padding: 8px;
+        padding: 8px 12px;
         border-radius: 6px;
+
+        /* Fixed sizing controls */
+    height: 40px;                  /* Fixed height */
+    display: flex;                 /* Vertically center text */
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: hidden;              /* Prevent overflow if text wraps */
     }
 
     .lum-oh-overlap-indicator.lum-oh-good {
@@ -360,34 +416,30 @@
         align-items: center;
         gap: 10px;
         font-size: 0.8rem;
-        color: var(--lum-oh-text-muted);
+        color: #cbd5e1;
     }
 
     .lum-oh-spinner {
         width: 16px;
         height: 16px;
-        border: 2px solid var(--lum-oh-border-color);
-        border-top: 2px solid var(--lum-oh-brand-color);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top: 2px solid #ffffff;
         border-radius: 50%;
         animation: lum-oh-spin 0.8s linear infinite;
     }
 
     @keyframes lum-oh-spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     .lum-oh-error-state {
-        color: var(--lum-oh-danger);
+        color: #f87171;
         font-size: 0.8rem;
         font-weight: 500;
     }
 </style>
+
 <script>
 (function () {
     const offices = {
@@ -396,28 +448,28 @@
             timezone: "Europe/Paris",
             lat: 48.8566,
             lon: 2.3522,
-            image: "/app/cityscape/Paris.png"
+            image: "cityscape/Paris.png"
         },
         austin: {
             name: "Austin Office",
             timezone: "America/Chicago",
             lat: 30.2672,
             lon: -97.7431,
-            image: "/app/cityscape/Austin.png"
+            image: "cityscape/Austin.png"
         },
         london: {
             name: "London Office",
             timezone: "Europe/London",
             lat: 51.5074,
             lon: -0.1278,
-            image: "/app/cityscape/London.png"
+            image: "cityscape/London.png"
         },
         tokyo: {
             name: "Tokyo Office",
             timezone: "Asia/Tokyo",
             lat: 35.6762,
             lon: 139.6503,
-            image: "/app/cityscape/Tokyo.png"
+            image: "cityscape/Tokyo.png"
         }
     };
 
@@ -445,7 +497,7 @@
             targetLabel: document.getElementById("lum-oh-target-label"),
             targetTimeVal: document.getElementById("lum-oh-target-time-val"),
             overlapAlert: document.getElementById("lum-oh-overlap-alert"),
-            officeImage: document.querySelector(".lum-oh-office-image")
+            statusCard: document.getElementById("lum-oh-status-card")
         };
         return Object.values(elements).every(el => el !== null);
     }
@@ -557,9 +609,8 @@
         elements.selectedName.textContent = office.name;
         elements.targetLabel.textContent = office.name + " Time:";
 
-        if (elements.officeImage) {
-            elements.officeImage.src = office.image;
-            elements.officeImage.alt = office.name + " Cityscape";
+        if (elements.statusCard) {
+            elements.statusCard.style.backgroundImage = `url('${office.image}')`;
         }
 
         startClock();
