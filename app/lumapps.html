@@ -388,4 +388,215 @@
         font-weight: 500;
     }
 </style>
-<script> (function () { const offices = { paris: { name: "Paris (HQ)", timezone: "Europe/Paris", lat: 48.8566, lon: 2.3522 }, austin: { name: "Austin Office", timezone: "America/Chicago", lat: 30.2672, lon: -97.7431 }, london: { name: "London Office", timezone: "Europe/London", lat: 51.5074, lon: -0.1278 }, tokyo: { name: "Tokyo Office", timezone: "Asia/Tokyo", lat: 35.6762, lon: 139.6503 } }; let currentOfficeKey = "paris"; let clockInterval = null; let elements = {}; function ensureElementsExist() { const root = document.getElementById("lum-oh-widget-root"); if (!root) return false; elements = { tabsContainer: document.getElementById("lum-oh-office-tabs"), selectedName: document.getElementById("lum-oh-selected-name"), workStatus: document.getElementById("lum-oh-work-status"), localClock: document.getElementById("lum-oh-local-clock"), localDate: document.getElementById("lum-oh-local-date"), weatherLoader: document.getElementById("lum-oh-weather-loader"), weatherContent: document.getElementById("lum-oh-weather-content"), weatherError: document.getElementById("lum-oh-weather-error"), weatherIcon: document.getElementById("lum-oh-weather-icon"), weatherTemp: document.getElementById("lum-oh-weather-temp"), weatherDesc: document.getElementById("lum-oh-weather-desc"), timeSlider: document.getElementById("lum-oh-time-slider"), userTimeVal: document.getElementById("lum-oh-user-time-val"), targetLabel: document.getElementById("lum-oh-target-label"), targetTimeVal: document.getElementById("lum-oh-target-time-val"), overlapAlert: document.getElementById("lum-oh-overlap-alert") }; return Object.values(elements).every(el => el !== null); } function getOfficeTimeData(timezone, baseDate = new Date()) { try { const formatter = new Intl.DateTimeFormat("en-US", { timeZone: timezone, hour: "numeric", minute: "2-digit", second: "2-digit", hour12: false, weekday: "long", month: "long", day: "numeric" }); const parts = formatter.formatToParts(baseDate); const map = {}; parts.forEach(p => map[p.type] = p.value); return { timeStr: map.hour + ":" + map.minute + ":" + map.second, dateStr: map.weekday + ", " + map.month + " " + map.day, hourVal: parseInt(map.hour, 10) }; } catch (e) { return { timeStr: "00:00:00", dateStr: "Unavailable", hourVal: 12 }; } } function init() { if (!ensureElementsExist()) { setTimeout(init, 100); return; } setupEventListeners(); updateOfficeDisplay(); startClock(); updatePlanner(); } function setupEventListeners() { elements.tabsContainer.addEventListener("click", function (e) { const tab = e.target.closest(".lum-oh-tab-btn"); if (!tab) return; document.querySelectorAll(".lum-oh-tab-btn").forEach(btn => { btn.classList.remove("lum-oh-active"); }); tab.classList.add("lum-oh-active"); currentOfficeKey = tab.getAttribute("data-office"); updateOfficeDisplay(); }); elements.timeSlider.addEventListener("input", updatePlanner); } function startClock() { if (clockInterval) clearInterval(clockInterval); function tick() { const office = offices[currentOfficeKey]; const data = getOfficeTimeData(office.timezone); elements.localClock.textContent = data.timeStr; elements.localDate.textContent = data.dateStr; if (data.hourVal >= 9 && data.hourVal < 18) { elements.workStatus.textContent = "Working Hours"; elements.workStatus.className = "lum-oh-status-badge lum-oh-online"; } else { elements.workStatus.textContent = "Off Hours"; elements.workStatus.className = "lum-oh-status-badge lum-oh-offline"; } } tick(); clockInterval = setInterval(tick, 1000); } async function fetchWeather(office) { elements.weatherLoader.classList.remove("lum-oh-hidden"); elements.weatherContent.classList.add("lum-oh-hidden"); elements.weatherError.classList.add("lum-oh-hidden"); try { const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=" + office.lat + "&longitude=" + office.lon + "&current_weather=true"); if (!response.ok) throw new Error("API error"); const data = await response.json(); const current = data.current_weather; const weatherCodes = { 0: { desc: "Clear sky", icon: "☀️" }, 1: { desc: "Mainly clear", icon: "🌤️" }, 2: { desc: "Partly cloudy", icon: "⛅" }, 3: { desc: "Overcast", icon: "☁️" }, 45: { desc: "Foggy", icon: "🌫️" }, 51: { desc: "Light drizzle", icon: "🌧️" }, 61: { desc: "Slight rain", icon: "🌧️" }, 71: { desc: "Slight snow", icon: "❄️" }, 95: { desc: "Thunderstorm", icon: "⛈️" } }; const codeInfo = weatherCodes[current.weathercode] || { desc: "Clear", icon: "☀️" }; elements.weatherTemp.textContent = Math.round(current.temperature) + "°C"; elements.weatherDesc.textContent = codeInfo.desc; elements.weatherIcon.textContent = codeInfo.icon; elements.weatherLoader.classList.add("lum-oh-hidden"); elements.weatherContent.classList.remove("lum-oh-hidden"); } catch (error) { elements.weatherLoader.classList.add("lum-oh-hidden"); elements.weatherError.classList.remove("lum-oh-hidden"); } } function updateOfficeDisplay() { const office = offices[currentOfficeKey]; elements.selectedName.textContent = office.name; elements.targetLabel.textContent = office.name + " Time:"; startClock(); fetchWeather(office); updatePlanner(); } function updatePlanner() { const office = offices[currentOfficeKey]; const selectedHour = parseInt(elements.timeSlider.value, 10); const userDate = new Date(); userDate.setHours(selectedHour, 0, 0, 0); elements.userTimeVal.textContent = userDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true }); const targetData = getOfficeTimeData(office.timezone, userDate); let displayHour = targetData.hourVal % 12; displayHour = displayHour ? displayHour : 12; const ampm = targetData.hourVal >= 12 ? "PM" : "AM"; elements.targetTimeVal.textContent = displayHour + ":00 " + ampm; const targetHour = targetData.hourVal; const userHour = userDate.getHours(); const isUserWorking = userHour >= 9 && userHour < 18; const isTargetWorking = targetHour >= 9 && targetHour < 18; if (isUserWorking && isTargetWorking) { elements.overlapAlert.textContent = "🟢 Excellent overlap! Both offices are within working hours."; elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-good"; } else if (isUserWorking || isTargetWorking) { elements.overlapAlert.textContent = "🟡 Partial overlap. One office will be outside standard hours."; elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-bad"; } else { elements.overlapAlert.textContent = "🔴 Poor overlap. Both offices are likely closed."; elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-bad"; } } init(); })(); </script>
+<script>
+(function () {
+    const offices = {
+        paris: {
+            name: "Paris (HQ)",
+            timezone: "Europe/Paris",
+            lat: 48.8566,
+            lon: 2.3522,
+            image: "/app/cityscape/Paris.png"
+        },
+        austin: {
+            name: "Austin Office",
+            timezone: "America/Chicago",
+            lat: 30.2672,
+            lon: -97.7431,
+            image: "/app/cityscape/Austin.png"
+        },
+        london: {
+            name: "London Office",
+            timezone: "Europe/London",
+            lat: 51.5074,
+            lon: -0.1278,
+            image: "/app/cityscape/London.png"
+        },
+        tokyo: {
+            name: "Tokyo Office",
+            timezone: "Asia/Tokyo",
+            lat: 35.6762,
+            lon: 139.6503,
+            image: "/app/cityscape/Tokyo.png"
+        }
+    };
+
+    let currentOfficeKey = "paris";
+    let clockInterval = null;
+    let elements = {};
+
+    function ensureElementsExist() {
+        const root = document.getElementById("lum-oh-widget-root");
+        if (!root) return false;
+        elements = {
+            tabsContainer: document.getElementById("lum-oh-office-tabs"),
+            selectedName: document.getElementById("lum-oh-selected-name"),
+            workStatus: document.getElementById("lum-oh-work-status"),
+            localClock: document.getElementById("lum-oh-local-clock"),
+            localDate: document.getElementById("lum-oh-local-date"),
+            weatherLoader: document.getElementById("lum-oh-weather-loader"),
+            weatherContent: document.getElementById("lum-oh-weather-content"),
+            weatherError: document.getElementById("lum-oh-weather-error"),
+            weatherIcon: document.getElementById("lum-oh-weather-icon"),
+            weatherTemp: document.getElementById("lum-oh-weather-temp"),
+            weatherDesc: document.getElementById("lum-oh-weather-desc"),
+            timeSlider: document.getElementById("lum-oh-time-slider"),
+            userTimeVal: document.getElementById("lum-oh-user-time-val"),
+            targetLabel: document.getElementById("lum-oh-target-label"),
+            targetTimeVal: document.getElementById("lum-oh-target-time-val"),
+            overlapAlert: document.getElementById("lum-oh-overlap-alert"),
+            officeImage: document.querySelector(".lum-oh-office-image")
+        };
+        return Object.values(elements).every(el => el !== null);
+    }
+
+    function getOfficeTimeData(timezone, baseDate = new Date()) {
+        try {
+            const formatter = new Intl.DateTimeFormat("en-US", {
+                timeZone: timezone,
+                hour: "numeric",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false,
+                weekday: "long",
+                month: "long",
+                day: "numeric"
+            });
+            const parts = formatter.formatToParts(baseDate);
+            const map = {};
+            parts.forEach(p => map[p.type] = p.value);
+            return {
+                timeStr: map.hour + ":" + map.minute + ":" + map.second,
+                dateStr: map.weekday + ", " + map.month + " " + map.day,
+                hourVal: parseInt(map.hour, 10)
+            };
+        } catch (e) {
+            return { timeStr: "00:00:00", dateStr: "Unavailable", hourVal: 12 };
+        }
+    }
+
+    function init() {
+        if (!ensureElementsExist()) {
+            setTimeout(init, 100);
+            return;
+        }
+        setupEventListeners();
+        updateOfficeDisplay();
+        startClock();
+        updatePlanner();
+    }
+
+    function setupEventListeners() {
+        elements.tabsContainer.addEventListener("click", function (e) {
+            const tab = e.target.closest(".lum-oh-tab-btn");
+            if (!tab) return;
+            document.querySelectorAll(".lum-oh-tab-btn").forEach(btn => {
+                btn.classList.remove("lum-oh-active");
+            });
+            tab.classList.add("lum-oh-active");
+            currentOfficeKey = tab.getAttribute("data-office");
+            updateOfficeDisplay();
+        });
+
+        elements.timeSlider.addEventListener("input", updatePlanner);
+    }
+
+    function startClock() {
+        if (clockInterval) clearInterval(clockInterval);
+        function tick() {
+            const office = offices[currentOfficeKey];
+            const data = getOfficeTimeData(office.timezone);
+            elements.localClock.textContent = data.timeStr;
+            elements.localDate.textContent = data.dateStr;
+            if (data.hourVal >= 9 && data.hourVal < 18) {
+                elements.workStatus.textContent = "Working Hours";
+                elements.workStatus.className = "lum-oh-status-badge lum-oh-online";
+            } else {
+                elements.workStatus.textContent = "Off Hours";
+                elements.workStatus.className = "lum-oh-status-badge lum-oh-offline";
+            }
+        }
+        tick();
+        clockInterval = setInterval(tick, 1000);
+    }
+
+    async function fetchWeather(office) {
+        elements.weatherLoader.classList.remove("lum-oh-hidden");
+        elements.weatherContent.classList.add("lum-oh-hidden");
+        elements.weatherError.classList.add("lum-oh-hidden");
+        try {
+            const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=" + office.lat + "&longitude=" + office.lon + "&current_weather=true");
+            if (!response.ok) throw new Error("API error");
+            const data = await response.json();
+            const current = data.current_weather;
+            const weatherCodes = {
+                0: { desc: "Clear sky", icon: "☀️" },
+                1: { desc: "Mainly clear", icon: "🌤️" },
+                2: { desc: "Partly cloudy", icon: "⛅" },
+                3: { desc: "Overcast", icon: "☁️" },
+                45: { desc: "Foggy", icon: "🌫️" },
+                51: { desc: "Light drizzle", icon: "🌧️" },
+                61: { desc: "Slight rain", icon: "🌧️" },
+                71: { desc: "Slight snow", icon: "❄️" },
+                95: { desc: "Thunderstorm", icon: "⛈️" }
+            };
+            const codeInfo = weatherCodes[current.weathercode] || { desc: "Clear", icon: "☀️" };
+            elements.weatherTemp.textContent = Math.round(current.temperature) + "°C";
+            elements.weatherDesc.textContent = codeInfo.desc;
+            elements.weatherIcon.textContent = codeInfo.icon;
+            elements.weatherLoader.classList.add("lum-oh-hidden");
+            elements.weatherContent.classList.remove("lum-oh-hidden");
+        } catch (error) {
+            elements.weatherLoader.classList.add("lum-oh-hidden");
+            elements.weatherError.classList.remove("lum-oh-hidden");
+        }
+    }
+
+    function updateOfficeDisplay() {
+        const office = offices[currentOfficeKey];
+        elements.selectedName.textContent = office.name;
+        elements.targetLabel.textContent = office.name + " Time:";
+
+        if (elements.officeImage) {
+            elements.officeImage.src = office.image;
+            elements.officeImage.alt = office.name + " Cityscape";
+        }
+
+        startClock();
+        fetchWeather(office);
+        updatePlanner();
+    }
+
+    function updatePlanner() {
+        const office = offices[currentOfficeKey];
+        const selectedHour = parseInt(elements.timeSlider.value, 10);
+        const userDate = new Date();
+        userDate.setHours(selectedHour, 0, 0, 0);
+        elements.userTimeVal.textContent = userDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
+
+        const targetData = getOfficeTimeData(office.timezone, userDate);
+        let displayHour = targetData.hourVal % 12;
+        displayHour = displayHour ? displayHour : 12;
+        const ampm = targetData.hourVal >= 12 ? "PM" : "AM";
+        elements.targetTimeVal.textContent = displayHour + ":00 " + ampm;
+
+        const targetHour = targetData.hourVal;
+        const userHour = userDate.getHours();
+        const isUserWorking = userHour >= 9 && userHour < 18;
+        const isTargetWorking = targetHour >= 9 && targetHour < 18;
+
+        if (isUserWorking && isTargetWorking) {
+            elements.overlapAlert.textContent = "🟢 Excellent overlap! Both offices are within working hours.";
+            elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-good";
+        } else if (isUserWorking || isTargetWorking) {
+            elements.overlapAlert.textContent = "🟡 Partial overlap. One office will be outside standard hours.";
+            elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-bad";
+        } else {
+            elements.overlapAlert.textContent = "🔴 Poor overlap. Both offices are likely closed.";
+            elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-bad";
+        }
+    }
+
+    init();
+})();
+</script>
