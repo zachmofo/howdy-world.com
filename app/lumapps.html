@@ -1,0 +1,391 @@
+<div class="lum-oh-widget-container" id="lum-oh-widget-root">
+    <div class="lum-oh-header">
+        <div class="lum-oh-header-title"> <span class="lum-oh-icon">🌐</span>
+            <h3>LumApps Global Office Hub</h3>
+        </div>
+        <p class="lum-oh-subtitle">Connect seamlessly with colleagues across our global offices</p>
+    </div> <!-- Office Selector Tabs -->
+    <div class="lum-oh-tabs" id="lum-oh-office-tabs"> <button class="lum-oh-tab-btn lum-oh-active"
+            data-office="paris">Paris (HQ)</button> <button class="lum-oh-tab-btn" data-office="austin">Austin</button>
+        <button class="lum-oh-tab-btn" data-office="london">London</button> <button class="lum-oh-tab-btn"
+            data-office="tokyo">Tokyo</button> </div> <!-- Main Display Grid -->
+    <div class="lum-oh-grid"> <!-- Left Column: Current Status -->
+        <div class="lum-oh-card lum-oh-status-card">
+            <div class="lum-oh-card-header">
+                <h4 id="lum-oh-selected-name">Paris Office</h4> <span class="lum-oh-status-badge"
+                    id="lum-oh-work-status">Working Hours</span>
+            </div>
+            <div class="lum-oh-time-display">
+                <div class="lum-oh-clock" id="lum-oh-local-clock">00:00:00</div>
+                <div class="lum-oh-date" id="lum-oh-local-date">Monday, January 1</div>
+            </div> <!-- Weather Sub-panel -->
+            <div class="lum-oh-weather-panel">
+                <div class="lum-oh-loading-spinner" id="lum-oh-weather-loader">
+                    <div class="lum-oh-spinner"></div> <span>Fetching local weather...</span>
+                </div>
+                <div class="lum-oh-weather-data lum-oh-hidden" id="lum-oh-weather-content"> <span
+                        class="lum-oh-weather-icon" id="lum-oh-weather-icon">☀️</span>
+                    <div class="lum-oh-weather-info"> <span class="lum-oh-temp" id="lum-oh-weather-temp">--°C</span>
+                        <span class="lum-oh-desc" id="lum-oh-weather-desc">Clear sky</span> </div>
+                </div>
+                <div class="lum-oh-error-state lum-oh-hidden" id="lum-oh-weather-error"> ⚠️ Weather currently
+                    unavailable </div>
+            </div>
+        </div> <!-- Right Column: Interactive Meeting Planner -->
+        <div class="lum-oh-card lum-oh-planner-card">
+            <h4>Timezone Overlap Planner</h4>
+            <p class="lum-oh-card-desc">Drag the slider to match your local time with the selected office.</p>
+            <div class="lum-oh-planner-slider-container">
+                <div class="lum-oh-slider-labels"> <span>12 AM</span> <span>6 AM</span> <span>12 PM</span> <span>6
+                        PM</span> <span>11 PM</span> </div> <input type="range" min="0" max="23" value="12"
+                    class="lum-oh-slider" id="lum-oh-time-slider">
+            </div>
+            <div class="lum-oh-comparison-grid">
+                <div class="lum-oh-comparison-row"> <span class="lum-oh-comp-label">Your Time (Local):</span> <span
+                        class="lum-oh-comp-val" id="lum-oh-user-time-val">12:00 PM</span> </div>
+                <div class="lum-oh-comparison-row"> <span class="lum-oh-comp-label" id="lum-oh-target-label">Paris
+                        Time:</span> <span class="lum-oh-comp-val" id="lum-oh-target-time-val">12:00 PM</span> </div>
+            </div>
+            <div class="lum-oh-overlap-indicator" id="lum-oh-overlap-alert"> 🟢 Excellent time to schedule a call!
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Strict Namespacing to prevent CSS leaks into LumApps Intranet */
+    :root {
+        --lum-oh-bg-primary: #ffffff;
+        --lum-oh-bg-secondary: #f8fafc;
+        --lum-oh-border-color: #e2e8f0;
+        --lum-oh-text-main: #1e293b;
+        --lum-oh-text-muted: #64748b;
+        --lum-oh-brand-color: #4f46e5;
+        --lum-oh-brand-hover: #4338ca;
+        --lum-oh-success: #10b981;
+        --lum-oh-warning: #f59e0b;
+        --lum-oh-danger: #ef4444;
+        --lum-oh-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+        --lum-oh-radius: 12px;
+    }
+
+    .lum-oh-widget-container {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: var(--lum-oh-bg-primary);
+        border: 1px solid var(--lum-oh-border-color);
+        border-radius: var(--lum-oh-radius);
+        padding: 24px;
+        max-width: 850px;
+        margin: 15px auto;
+        box-shadow: var(--lum-oh-shadow);
+        color: var(--lum-oh-text-main);
+        box-sizing: border-box;
+    }
+
+    .lum-oh-widget-container * {
+        box-sizing: border-box;
+    }
+
+    .lum-oh-header {
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--lum-oh-border-color);
+        padding-bottom: 16px;
+    }
+
+    .lum-oh-header-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .lum-oh-header-title h3 {
+        margin: 0;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--lum-oh-text-main);
+    }
+
+    .lum-oh-icon {
+        font-size: 1.5rem;
+    }
+
+    .lum-oh-subtitle {
+        margin: 4px 0 0 0;
+        font-size: 0.9rem;
+        color: var(--lum-oh-text-muted);
+    }
+
+    /* Tabs */
+    .lum-oh-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .lum-oh-tab-btn {
+        background: var(--lum-oh-bg-secondary);
+        border: 1px solid var(--lum-oh-border-color);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--lum-oh-text-muted);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .lum-oh-tab-btn:hover {
+        background: var(--lum-oh-border-color);
+        color: var(--lum-oh-text-main);
+    }
+
+    .lum-oh-tab-btn.lum-oh-active {
+        background: var(--lum-oh-brand-color);
+        color: #ffffff;
+        border-color: var(--lum-oh-brand-color);
+    }
+
+    /* Grid Layout */
+    .lum-oh-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .lum-oh-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .lum-oh-card {
+        background: var(--lum-oh-bg-secondary);
+        border: 1px solid var(--lum-oh-border-color);
+        border-radius: var(--lum-oh-radius);
+        padding: 20px;
+    }
+
+    .lum-oh-card h4 {
+        margin: 0 0 12px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .lum-oh-card-desc {
+        font-size: 0.8rem;
+        color: var(--lum-oh-text-muted);
+        margin: 0 0 16px 0;
+    }
+
+    /* Status Card Specifics */
+    .lum-oh-status-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 240px;
+    }
+
+    .lum-oh-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .lum-oh-card-header h4 {
+        margin: 0;
+    }
+
+    .lum-oh-status-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 4px 8px;
+        border-radius: 12px;
+        text-transform: uppercase;
+    }
+
+    .lum-oh-status-badge.lum-oh-online {
+        background-color: rgba(16, 185, 129, 0.15);
+        color: var(--lum-oh-success);
+    }
+
+    .lum-oh-status-badge.lum-oh-offline {
+        background-color: rgba(239, 68, 68, 0.15);
+        color: var(--lum-oh-danger);
+    }
+
+    .lum-oh-time-display {
+        margin-bottom: 20px;
+    }
+
+    .lum-oh-clock {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+        color: var(--lum-oh-brand-color);
+    }
+
+    .lum-oh-date {
+        font-size: 0.85rem;
+        color: var(--lum-oh-text-muted);
+        margin-top: 4px;
+    }
+
+    /* Weather Panel */
+    .lum-oh-weather-panel {
+        border-top: 1px solid var(--lum-oh-border-color);
+        padding-top: 15px;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+    }
+
+    .lum-oh-weather-data {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .lum-oh-weather-icon {
+        font-size: 1.8rem;
+    }
+
+    .lum-oh-weather-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lum-oh-temp {
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+
+    .lum-oh-desc {
+        font-size: 0.75rem;
+        color: var(--lum-oh-text-muted);
+        text-transform: capitalize;
+    }
+
+    /* Planner Card Specifics */
+    .lum-oh-planner-slider-container {
+        margin: 25px 0 20px 0;
+    }
+
+    .lum-oh-slider-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        color: var(--lum-oh-text-muted);
+        margin-bottom: 6px;
+        padding: 0 4px;
+    }
+
+    .lum-oh-slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--lum-oh-border-color);
+        outline: none;
+        margin: 0;
+    }
+
+    .lum-oh-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--lum-oh-brand-color);
+        cursor: pointer;
+        transition: transform 0.1s ease;
+    }
+
+    .lum-oh-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+    }
+
+    .lum-oh-comparison-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: var(--lum-oh-bg-primary);
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid var(--lum-oh-border-color);
+        margin-bottom: 15px;
+    }
+
+    .lum-oh-comparison-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+    }
+
+    .lum-oh-comp-label {
+        color: var(--lum-oh-text-muted);
+    }
+
+    .lum-oh-comp-val {
+        font-weight: 600;
+    }
+
+    .lum-oh-overlap-indicator {
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 8px;
+        border-radius: 6px;
+    }
+
+    .lum-oh-overlap-indicator.lum-oh-good {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--lum-oh-success);
+    }
+
+    .lum-oh-overlap-indicator.lum-oh-bad {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--lum-oh-danger);
+    }
+
+    /* Utilities */
+    .lum-oh-hidden {
+        display: none !important;
+    }
+
+    .lum-oh-loading-spinner {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.8rem;
+        color: var(--lum-oh-text-muted);
+    }
+
+    .lum-oh-spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--lum-oh-border-color);
+        border-top: 2px solid var(--lum-oh-brand-color);
+        border-radius: 50%;
+        animation: lum-oh-spin 0.8s linear infinite;
+    }
+
+    @keyframes lum-oh-spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .lum-oh-error-state {
+        color: var(--lum-oh-danger);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+</style>
+<script> (function () { const offices = { paris: { name: "Paris (HQ)", timezone: "Europe/Paris", lat: 48.8566, lon: 2.3522 }, austin: { name: "Austin Office", timezone: "America/Chicago", lat: 30.2672, lon: -97.7431 }, london: { name: "London Office", timezone: "Europe/London", lat: 51.5074, lon: -0.1278 }, tokyo: { name: "Tokyo Office", timezone: "Asia/Tokyo", lat: 35.6762, lon: 139.6503 } }; let currentOfficeKey = "paris"; let clockInterval = null; let elements = {}; function ensureElementsExist() { const root = document.getElementById("lum-oh-widget-root"); if (!root) return false; elements = { tabsContainer: document.getElementById("lum-oh-office-tabs"), selectedName: document.getElementById("lum-oh-selected-name"), workStatus: document.getElementById("lum-oh-work-status"), localClock: document.getElementById("lum-oh-local-clock"), localDate: document.getElementById("lum-oh-local-date"), weatherLoader: document.getElementById("lum-oh-weather-loader"), weatherContent: document.getElementById("lum-oh-weather-content"), weatherError: document.getElementById("lum-oh-weather-error"), weatherIcon: document.getElementById("lum-oh-weather-icon"), weatherTemp: document.getElementById("lum-oh-weather-temp"), weatherDesc: document.getElementById("lum-oh-weather-desc"), timeSlider: document.getElementById("lum-oh-time-slider"), userTimeVal: document.getElementById("lum-oh-user-time-val"), targetLabel: document.getElementById("lum-oh-target-label"), targetTimeVal: document.getElementById("lum-oh-target-time-val"), overlapAlert: document.getElementById("lum-oh-overlap-alert") }; return Object.values(elements).every(el => el !== null); } function getOfficeTimeData(timezone, baseDate = new Date()) { try { const formatter = new Intl.DateTimeFormat("en-US", { timeZone: timezone, hour: "numeric", minute: "2-digit", second: "2-digit", hour12: false, weekday: "long", month: "long", day: "numeric" }); const parts = formatter.formatToParts(baseDate); const map = {}; parts.forEach(p => map[p.type] = p.value); return { timeStr: map.hour + ":" + map.minute + ":" + map.second, dateStr: map.weekday + ", " + map.month + " " + map.day, hourVal: parseInt(map.hour, 10) }; } catch (e) { return { timeStr: "00:00:00", dateStr: "Unavailable", hourVal: 12 }; } } function init() { if (!ensureElementsExist()) { setTimeout(init, 100); return; } setupEventListeners(); updateOfficeDisplay(); startClock(); updatePlanner(); } function setupEventListeners() { elements.tabsContainer.addEventListener("click", function (e) { const tab = e.target.closest(".lum-oh-tab-btn"); if (!tab) return; document.querySelectorAll(".lum-oh-tab-btn").forEach(btn => { btn.classList.remove("lum-oh-active"); }); tab.classList.add("lum-oh-active"); currentOfficeKey = tab.getAttribute("data-office"); updateOfficeDisplay(); }); elements.timeSlider.addEventListener("input", updatePlanner); } function startClock() { if (clockInterval) clearInterval(clockInterval); function tick() { const office = offices[currentOfficeKey]; const data = getOfficeTimeData(office.timezone); elements.localClock.textContent = data.timeStr; elements.localDate.textContent = data.dateStr; if (data.hourVal >= 9 && data.hourVal < 18) { elements.workStatus.textContent = "Working Hours"; elements.workStatus.className = "lum-oh-status-badge lum-oh-online"; } else { elements.workStatus.textContent = "Off Hours"; elements.workStatus.className = "lum-oh-status-badge lum-oh-offline"; } } tick(); clockInterval = setInterval(tick, 1000); } async function fetchWeather(office) { elements.weatherLoader.classList.remove("lum-oh-hidden"); elements.weatherContent.classList.add("lum-oh-hidden"); elements.weatherError.classList.add("lum-oh-hidden"); try { const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=" + office.lat + "&longitude=" + office.lon + "&current_weather=true"); if (!response.ok) throw new Error("API error"); const data = await response.json(); const current = data.current_weather; const weatherCodes = { 0: { desc: "Clear sky", icon: "☀️" }, 1: { desc: "Mainly clear", icon: "🌤️" }, 2: { desc: "Partly cloudy", icon: "⛅" }, 3: { desc: "Overcast", icon: "☁️" }, 45: { desc: "Foggy", icon: "🌫️" }, 51: { desc: "Light drizzle", icon: "🌧️" }, 61: { desc: "Slight rain", icon: "🌧️" }, 71: { desc: "Slight snow", icon: "❄️" }, 95: { desc: "Thunderstorm", icon: "⛈️" } }; const codeInfo = weatherCodes[current.weathercode] || { desc: "Clear", icon: "☀️" }; elements.weatherTemp.textContent = Math.round(current.temperature) + "°C"; elements.weatherDesc.textContent = codeInfo.desc; elements.weatherIcon.textContent = codeInfo.icon; elements.weatherLoader.classList.add("lum-oh-hidden"); elements.weatherContent.classList.remove("lum-oh-hidden"); } catch (error) { elements.weatherLoader.classList.add("lum-oh-hidden"); elements.weatherError.classList.remove("lum-oh-hidden"); } } function updateOfficeDisplay() { const office = offices[currentOfficeKey]; elements.selectedName.textContent = office.name; elements.targetLabel.textContent = office.name + " Time:"; startClock(); fetchWeather(office); updatePlanner(); } function updatePlanner() { const office = offices[currentOfficeKey]; const selectedHour = parseInt(elements.timeSlider.value, 10); const userDate = new Date(); userDate.setHours(selectedHour, 0, 0, 0); elements.userTimeVal.textContent = userDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true }); const targetData = getOfficeTimeData(office.timezone, userDate); let displayHour = targetData.hourVal % 12; displayHour = displayHour ? displayHour : 12; const ampm = targetData.hourVal >= 12 ? "PM" : "AM"; elements.targetTimeVal.textContent = displayHour + ":00 " + ampm; const targetHour = targetData.hourVal; const userHour = userDate.getHours(); const isUserWorking = userHour >= 9 && userHour < 18; const isTargetWorking = targetHour >= 9 && targetHour < 18; if (isUserWorking && isTargetWorking) { elements.overlapAlert.textContent = "🟢 Excellent overlap! Both offices are within working hours."; elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-good"; } else if (isUserWorking || isTargetWorking) { elements.overlapAlert.textContent = "🟡 Partial overlap. One office will be outside standard hours."; elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-bad"; } else { elements.overlapAlert.textContent = "🔴 Poor overlap. Both offices are likely closed."; elements.overlapAlert.className = "lum-oh-overlap-indicator lum-oh-bad"; } } init(); })(); </script>
