@@ -22,6 +22,28 @@ body {
     transition: background 0.3s, color 0.3s;
 }
 
+/* Top navigation bar */
+.top-nav {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 14px 20px;
+    background: #1a1a1a;
+    border-bottom: 2px solid var(--primary-green);
+}
+
+.top-nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.top-nav a:hover {
+    color: var(--accent-yellow);
+}
+
 header {
     padding: 0;
 }
@@ -111,4 +133,10 @@ footer {
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
     .tagline { font-size: 1.3rem; }
+
+    .top-nav {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
