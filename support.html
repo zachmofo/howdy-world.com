@@ -71,9 +71,10 @@
             </article>
 
             <article class="give-card">
-                <h3>Crypto</h3>
-                <p>Optional, and only if you already use it. Bitcoin only — one address, no other coins. Safer that way; wrong-network sends are gone forever.</p>
-                <span class="give-soon">BTC address coming — send me the receive address to publish</span>
+                <h3>Bitcoin</h3>
+                <p>Bitcoin network only. Do not send Bitcoin Cash, ETH, or anything else — it will be lost.</p>
+                <p class="btc-address" id="btc-address">3BrYKKNQQe9MrnRTyje4fgp4QvmzuiqjYV</p>
+                <button type="button" class="cta give-btn" onclick="copyBtc()">Copy address</button>
             </article>
         </div>
     </section>
@@ -95,6 +96,12 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             body.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+        }
+        function copyBtc() {
+            const addr = document.getElementById('btc-address').textContent.trim();
+            navigator.clipboard.writeText(addr).then(() => {
+                alert('Bitcoin address copied');
+            });
         }
         window.onload = () => {
             const savedTheme = localStorage.getItem('theme');
