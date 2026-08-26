@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Support Howdy World Coding — keep free coding lessons available for Texas youth.">
+    <title>Support Howdy World Coding</title>
+    <link rel="icon" href="https://via.placeholder.com/32x32?text=🤠" type="image/x-icon">
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+    <nav class="top-nav">
+        <a href="/">Home</a>
+        <a href="/support.html">Support</a>
+        <a href="app/ranch-office-hub.html">Ranch Office Hub</a>
+        <a href="https://youtube.com/@howdy-world-coding" target="_blank">YouTube</a>
+        <a href="https://github.com/zachmofo" target="_blank">GitHub</a>
+    </nav>
+
+    <header>
+        <div class="hero">
+            <h1>Keep Howdy World free</h1>
+            <p class="tagline">Lessons stay free. Support is optional.</p>
+        </div>
+    </header>
+
+    <section class="about">
+        <h2 style="text-align:center;">Why this page exists</h2>
+        <p style="font-size:1.2rem; line-height:1.7; text-align:center; max-width:800px; margin:0 auto;">
+            Howdy World is a free coding resource for Texas youth and anyone who works the land.
+            No paywall. No course upsell. If this work is useful, a little support covers the domain, the mic, and the time it takes to film the next lesson.
+        </p>
+        <p style="text-align:center; max-width:800px; margin:1.25rem auto 0; opacity:0.85;">
+            This is not a tax-deductible charity. It’s just a guy in Texas trying to keep the lights on for the next video.
+        </p>
+    </section>
+
+    <section>
+        <h2 style="text-align:center; margin-top:0;">Ways to help</h2>
+        <p style="text-align:center; max-width:640px; margin:0 auto 2rem;">The free option is still the best one: share a lesson with a kid who would actually use it.</p>
+
+        <div class="give-grid">
+            <article class="give-card">
+                <h3>Share it</h3>
+                <p>Send the channel to a 4-H family, a homeschool group, or a shop teacher. That helps more than a dollar.</p>
+                <a class="cta give-btn" href="https://youtube.com/@howdy-world-coding" target="_blank" rel="noopener">YouTube channel</a>
+            </article>
+
+            <article class="give-card">
+                <h3>Venmo</h3>
+                <p>Easiest for most folks in Texas. Handle goes here as soon as it’s set.</p>
+                <span class="give-soon">Venmo link coming</span>
+            </article>
+
+            <article class="give-card">
+                <h3>Cash App</h3>
+                <p>Good backup if Venmo isn’t your thing.</p>
+                <span class="give-soon">Cash App link coming</span>
+            </article>
+
+            <article class="give-card">
+                <h3>PayPal</h3>
+                <p>Best for people outside the usual Venmo/Cash App circle.</p>
+                <span class="give-soon">PayPal link coming</span>
+            </article>
+
+            <article class="give-card">
+                <h3>Crypto</h3>
+                <p>Optional. Bitcoin only, one address, shown as text so nobody fat-fingers a chain.</p>
+                <span class="give-soon">Address coming</span>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Howdy World Coding • <a href="https://howdy-world.com" style="color:var(--accent-yellow);">howdy-world.com</a></p>
+        <p>Made for Texas kids who want to code on the land.</p>
+        <div class="social-links">
+            <a href="https://youtube.com/@howdy-world-coding">YouTube</a>
+            <a href="https://github.com/zachmofo">GitHub</a>
+            <a href="/support.html">Support</a>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+            }
+        };
+    </script>
+</body>
+</html>
