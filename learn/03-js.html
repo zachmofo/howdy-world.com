@@ -22,16 +22,19 @@
         <p>JavaScript · done when weight gain calculates on click</p>
     </div>
     <article class="lesson-content">
-        <p>HTML is bones. CSS is paint. JavaScript is the hired hand that does the arithmetic so you don't have to.</p>
-        <p>Add two columns to the table: <strong>Start lbs</strong> and <strong>Now lbs</strong>, plus an empty <strong>Gain</strong> column. Put the numbers on the row as <code>data-start</code> and <code>data-current</code>.</p>
 
-        <h2>Live result</h2>
+        <p>HTML is bones. CSS is paint. JavaScript is the hired hand that does the arithmetic so you do not sit there with a pencil every time a steer comes off the scale.</p>
+        <p>We are going to add starting weight and current weight to the card, then a button that fills in the gain. You already know the four names. Now the page does the subtraction.</p>
+
+        <h2>Here is the finished look</h2>
+        <p>Click Calculate gain in the preview. The last column should fill in.</p>
         <div class="preview-wrap">
             <iframe src="/learn/demo/step3.html" title="Lesson 3 demo" loading="lazy"></iframe>
         </div>
 
-        <h2>Step 1 — mark the rows</h2>
-<pre class="lesson-code">&lt;tr data-start="1100" data-current="1280"&gt;
+        <h2>Step 1 — put the numbers on the row</h2>
+        <p>Add columns for Start, Now, and Gain. Hang the numbers on the row itself as data-start and data-current so the script can find them later. One animal looks like this:</p>
+        <pre class="lesson-code">&lt;tr data-start="1100" data-current="1280"&gt;
   &lt;td&gt;Black Gold&lt;/td&gt;
   &lt;td&gt;FW-01&lt;/td&gt;
   &lt;td&gt;Texas Longhorn&lt;/td&gt;
@@ -39,26 +42,29 @@
   &lt;td&gt;1280&lt;/td&gt;
   &lt;td class="gain"&gt;—&lt;/td&gt;
 &lt;/tr&gt;</pre>
-        <p>Do that for all four. Then a button under the table:</p>
-<pre class="lesson-code">&lt;p&gt;&lt;button id="calc-btn" type="button"&gt;Calculate gain&lt;/button&gt;&lt;/p&gt;</pre>
+        <p>Do that for all four. Then put a button under the table:</p>
+        <pre class="lesson-code">&lt;p&gt;&lt;button id="calc-btn" type="button"&gt;Calculate gain&lt;/button&gt;&lt;/p&gt;</pre>
 
-        <h2>Step 2 — script.js</h2>
-        <p>New file in the same folder. Link it at the bottom of <code>body</code>:</p>
-<pre class="lesson-code">&lt;script src="script.js"&gt;&lt;/script&gt;</pre>
-<pre class="lesson-code">document.getElementById("calc-btn").addEventListener("click", function () {
+        <h2>Step 2 — a second file for the math</h2>
+        <p>Create script.js in the same folder. At the bottom of the HTML body, load it:</p>
+        <pre class="lesson-code">&lt;script src="script.js"&gt;&lt;/script&gt;</pre>
+        <p>Inside script.js, listen for a click, walk every marked row, subtract, and write the answer into the Gain cell.</p>
+        <pre class="lesson-code">document.getElementById("calc-btn").addEventListener("click", function () {
   document.querySelectorAll("tr[data-start]").forEach(function (row) {
     var start = Number(row.getAttribute("data-start"));
     var current = Number(row.getAttribute("data-current"));
     row.querySelector(".gain").textContent = (current - start) + " lbs";
   });
 });</pre>
-        <p>Click the button. Gain should fill in. That's the page doing ranch math.</p>
+        <p>Save, refresh, click the button. If Black Gold shows 180 lbs, the hired hand showed up for work.</p>
+        <p>Next lesson we stop typing animals into HTML and write them as a list of data instead.</p>
 
         <div class="lesson-pager">
             <a href="/learn/02-css.html">← Lesson 2</a>
             <a href="/learn.html">All lessons</a>
-            <a href="/learn/04-json.html">Lesson 4 — JSON →</a>
+            <a href="/learn/04-json.html">Lesson 4 →</a>
         </div>
+
     </article>
     <footer>
         <p>&copy; 2026 Howdy World Coding</p>

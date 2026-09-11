@@ -22,18 +22,22 @@
         <p>HTML · done when four longhorns show in the browser</p>
     </div>
     <article class="lesson-content">
-        <p>Today we build the bones. HTML is structure — pens, chute, paper record book. Nothing pretty yet.</p>
-        <p>Create a folder named <code>ranch-record</code>. Inside it, a file named exactly <code>index.html</code>.</p>
 
-        <h2>Live result</h2>
-        <p>This is where you'll be at the end of the lesson. Plain on purpose.</p>
+        <p>Howdy. Today we build the bones. If you have never written a line of code, that is perfect. HTML is just structure — pens, chute, paper record book. Nothing pretty yet. Just the animals standing there so we can see them.</p>
+        <p>We are building a Ranch Record Card for a made-up place called Howdy World Ranch. The example herd is inspired by Fort Worth Stockyards longhorns a lot of us have seen on Exchange Street. We are not claiming those cattle. They are teaching examples because people in Texas already know the names.</p>
+
+        <h2>What you need</h2>
+        <p>A text editor and a browser. Chromebook Text, Notepad, TextEdit, VS Code — all fine. Make a folder on your computer named ranch-record. Inside it, a file named exactly index.html. That ending matters. That is how the browser knows what kind of file this is.</p>
+
+        <h2>Where you will end up</h2>
+        <p>A plain page with four longhorns. Boring is correct. Paint is Lesson 2.</p>
         <div class="preview-wrap">
             <iframe src="/learn/demo/step1.html" title="Lesson 1 demo" loading="lazy"></iframe>
         </div>
 
         <h2>Step 1 — the skeleton</h2>
-        <div class="step"><strong>Type this first.</strong> Every HTML page starts here.</div>
-<pre class="lesson-code">&lt;!DOCTYPE html&gt;
+        <p>Every HTML page starts with the same bones. Type this first.</p>
+        <pre class="lesson-code">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;meta charset="UTF-8"&gt;
@@ -44,11 +48,11 @@
 
 &lt;/body&gt;
 &lt;/html&gt;</pre>
-        <p><code>&lt;head&gt;</code> is about the page. <code>&lt;body&gt;</code> is what you see.</p>
+        <p>The first line just tells the browser this is a modern page. The head is information about the page — the tab title, the character set. The body is everything a visitor actually sees. Ours is empty on purpose. Next we fill it.</p>
 
-        <h2>Step 2 — header and intro</h2>
-        <p>Inside <code>&lt;body&gt;</code>:</p>
-<pre class="lesson-code">&lt;header&gt;
+        <h2>Step 2 — the ranch name</h2>
+        <p>Inside the body, add a header and a short intro so nobody wonders what they are looking at.</p>
+        <pre class="lesson-code">&lt;header&gt;
   &lt;h1&gt;Howdy World Ranch&lt;/h1&gt;
   &lt;p class="tagline"&gt;Livestock Record Card — Fort Worth Stockyards Inspired Herd&lt;/p&gt;
 &lt;/header&gt;
@@ -61,9 +65,11 @@
       teaching example while we learn to build tools for the ranch.
     &lt;/p&gt;
   &lt;/section&gt;</pre>
+        <p>The big heading is the ranch name. The line under it is a tagline. The paragraph is honesty: these are teaching examples, not a claim that we run the Stockyards.</p>
 
         <h2>Step 3 — the herd table</h2>
-<pre class="lesson-code">  &lt;section class="herd"&gt;
+        <p>Still in the main part of the page, add the record itself. A table is rows and cells. The top row is labels. The rest are animals.</p>
+        <pre class="lesson-code">  &lt;section class="herd"&gt;
     &lt;h2&gt;Current Herd&lt;/h2&gt;
     &lt;table&gt;
       &lt;thead&gt;
@@ -87,16 +93,18 @@
 &lt;footer&gt;
   &lt;p&gt;Howdy World Coding · Lesson 1 — HTML&lt;/p&gt;
 &lt;/footer&gt;</pre>
-        <p>Rows are <code>&lt;tr&gt;</code>. Header cells are <code>&lt;th&gt;</code>. Data cells are <code>&lt;td&gt;</code>.</p>
+        <p>Black Gold, Brutus, McCree, Blacksmith. Those names have been part of the Fort Worth Herd. We are using them as data only.</p>
 
         <h2>Save and open</h2>
-        <p>Save the file. Double-click it or drag it onto a browser. You should see the ranch name and four animals. If it looks boring, you did it right.</p>
+        <p>Save the file. Double-click it, or drag it onto a browser window. You should see the ranch name, a short explanation, and four longhorns. If it looks like a school report, you did it right.</p>
+        <p>Next lesson we take this exact page and make it look like a bulletin board at the sale barn.</p>
 
         <div class="lesson-pager">
             <a href="/learn/00-intro.html">← Intro</a>
             <a href="/learn.html">All lessons</a>
-            <a href="/learn/02-css.html">Lesson 2 — CSS →</a>
+            <a href="/learn/02-css.html">Lesson 2 →</a>
         </div>
+
     </article>
     <footer>
         <p>&copy; 2026 Howdy World Coding</p>
