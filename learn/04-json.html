@@ -55,9 +55,9 @@ var tbody = document.getElementById("herd-body");
 herd.forEach(function (animal) {
   var gain = animal.currentWeight - animal.startWeight;
   tbody.insertAdjacentHTML("beforeend",
-    "<tr><td>" + animal.name + "</td><td>" + animal.tag + "</td><td>" +
-    animal.startWeight + "</td><td>" + animal.currentWeight + "</td><td>" +
-    gain + " lbs</td></tr>"
+    "&lt;tr&gt;&lt;td&gt;" + animal.name + "&lt;/td&gt;&lt;td&gt;" + animal.tag + "&lt;/td&gt;&lt;td&gt;" +
+    animal.startWeight + "&lt;/td&gt;&lt;td&gt;" + animal.currentWeight + "&lt;/td&gt;&lt;td&gt;" +
+    gain + " lbs&lt;/td&gt;&lt;/tr&gt;"
   );
 });</pre>
         <p>HTML <code>tbody</code> starts empty. JavaScript fills it. Add a fifth animal in the list and refresh — the table grows. That's the point.</p>

@@ -52,14 +52,14 @@
     herd.forEach(function (animal) {
       var gain = animal.currentWeight - animal.startWeight;
       tbody.insertAdjacentHTML("beforeend",
-        "<tr><td>" + animal.name + "</td><td>" + animal.tag + "</td><td>" +
-        gain + " lbs</td></tr>"
+        "&lt;tr&gt;&lt;td&gt;" + animal.name + "&lt;/td&gt;&lt;td&gt;" + animal.tag + "&lt;/td&gt;&lt;td&gt;" +
+        gain + " lbs&lt;/td&gt;&lt;/tr&gt;"
       );
     });
   })
   .catch(function () {
     document.getElementById("herd-body").innerHTML =
-      "<tr><td colspan='3'>Could not load the herd file.</td></tr>";
+      "&lt;tr&gt;&lt;td colspan='3'&gt;Could not load the herd file.&lt;/td&gt;&lt;/tr&gt;";
   });</pre>
 
         <h2>Important</h2>

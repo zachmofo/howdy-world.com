@@ -31,20 +31,20 @@
         </div>
 
         <h2>Step 1 — mark the rows</h2>
-<pre class="lesson-code"><tr data-start="1100" data-current="1280">
-  <td>Black Gold</td>
-  <td>FW-01</td>
-  <td>Texas Longhorn</td>
-  <td>1100</td>
-  <td>1280</td>
-  <td class="gain">—</td>
-</tr></pre>
+<pre class="lesson-code">&lt;tr data-start="1100" data-current="1280"&gt;
+  &lt;td&gt;Black Gold&lt;/td&gt;
+  &lt;td&gt;FW-01&lt;/td&gt;
+  &lt;td&gt;Texas Longhorn&lt;/td&gt;
+  &lt;td&gt;1100&lt;/td&gt;
+  &lt;td&gt;1280&lt;/td&gt;
+  &lt;td class="gain"&gt;—&lt;/td&gt;
+&lt;/tr&gt;</pre>
         <p>Do that for all four. Then a button under the table:</p>
-<pre class="lesson-code"><p><button id="calc-btn" type="button">Calculate gain</button></p></pre>
+<pre class="lesson-code">&lt;p&gt;&lt;button id="calc-btn" type="button"&gt;Calculate gain&lt;/button&gt;&lt;/p&gt;</pre>
 
         <h2>Step 2 — script.js</h2>
         <p>New file in the same folder. Link it at the bottom of <code>body</code>:</p>
-<pre class="lesson-code"><script src="script.js"></script></pre>
+<pre class="lesson-code">&lt;script src="script.js"&gt;&lt;/script&gt;</pre>
 <pre class="lesson-code">document.getElementById("calc-btn").addEventListener("click", function () {
   document.querySelectorAll("tr[data-start]").forEach(function (row) {
     var start = Number(row.getAttribute("data-start"));
