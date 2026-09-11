@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Lesson 4 — JSON — Howdy World</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <nav class="top-nav">
+        <a href="/">Home</a>
+        <a href="/learn.html">Learn</a>
+        <a href="/support.html">Support</a>
+        <a href="/app/ranch-office-hub.html">Ranch Office Hub</a>
+        <a href="https://youtube.com/@howdy-world-coding" target="_blank">YouTube</a>
+        <a href="https://github.com/zachmofo" target="_blank">GitHub</a>
+    </nav>
+    <div class="lesson-bar">
+        <h1>Lesson 4 — Your Herd as Data</h1>
+        <p>JSON · done when the table is built from a list, not typed by hand</p>
+    </div>
+    <article class="lesson-content">
+        <p>Four animals in HTML is fine. Forty is a mess. JSON is how we write a herd as data: names, tags, weights — a list the computer can loop over.</p>
+
+        <h2>Live result</h2>
+        <p>Same looking card. The rows are drawn by JavaScript from a list.</p>
+        <div class="preview-wrap">
+            <iframe src="/learn/demo/step4.html" title="Lesson 4 demo" loading="lazy"></iframe>
+        </div>
+
+        <h2>Step 1 — the shape</h2>
+        <p>One animal looks like this. Curly braces, keys, values, commas. Quotes around text. Numbers bare.</p>
+<pre class="lesson-code">{
+  "name": "Black Gold",
+  "tag": "FW-01",
+  "breed": "Texas Longhorn",
+  "notes": "Rare black pattern, 100\"+ horns",
+  "startWeight": 1100,
+  "currentWeight": 1280
+}</pre>
+        <p>The whole herd is an array: square brackets, animals separated by commas.</p>
+
+        <h2>Step 2 — put the list in script.js</h2>
+        <p>In this lesson the data still lives in JavaScript. Next lesson it moves to its own file.</p>
+<pre class="lesson-code">var herd = [
+  { "name": "Black Gold", "tag": "FW-01", "breed": "Texas Longhorn", "notes": "Rare black pattern", "startWeight": 1100, "currentWeight": 1280 },
+  { "name": "Brutus", "tag": "FW-02", "breed": "Texas Longhorn", "notes": "Largest steer", "startWeight": 1400, "currentWeight": 1520 },
+  { "name": "McCree", "tag": "FW-03", "breed": "Texas Longhorn", "notes": "Strong presence", "startWeight": 1200, "currentWeight": 1310 },
+  { "name": "Blacksmith", "tag": "FW-04", "breed": "Texas Longhorn", "notes": "Newer addition", "startWeight": 1050, "currentWeight": 1180 }
+];
+
+var tbody = document.getElementById("herd-body");
+herd.forEach(function (animal) {
+  var gain = animal.currentWeight - animal.startWeight;
+  tbody.insertAdjacentHTML("beforeend",
+    "<tr><td>" + animal.name + "</td><td>" + animal.tag + "</td><td>" +
+    animal.startWeight + "</td><td>" + animal.currentWeight + "</td><td>" +
+    gain + " lbs</td></tr>"
+  );
+});</pre>
+        <p>HTML <code>tbody</code> starts empty. JavaScript fills it. Add a fifth animal in the list and refresh — the table grows. That's the point.</p>
+
+        <div class="lesson-pager">
+            <a href="/learn/03-js.html">← Lesson 3</a>
+            <a href="/learn.html">All lessons</a>
+            <a href="/learn/05-fetch.html">Lesson 5 — fetch →</a>
+        </div>
+    </article>
+    <footer>
+        <p>&copy; 2026 Howdy World Coding</p>
+        <div class="social-links"><a href="/learn.html">Learn</a><a href="/support.html">Support</a></div>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const t = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+        }
+        window.onload = () => { const s = localStorage.getItem('theme'); if (s) document.body.setAttribute('data-theme', s); };
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Lesson 1 — HTML — Howdy World</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <nav class="top-nav">
+        <a href="/">Home</a>
+        <a href="/learn.html">Learn</a>
+        <a href="/support.html">Support</a>
+        <a href="/app/ranch-office-hub.html">Ranch Office Hub</a>
+        <a href="https://youtube.com/@howdy-world-coding" target="_blank">YouTube</a>
+        <a href="https://github.com/zachmofo" target="_blank">GitHub</a>
+    </nav>
+    <div class="lesson-bar">
+        <h1>Lesson 1 — The Bones of a Ranch Record</h1>
+        <p>HTML · done when four longhorns show in the browser</p>
+    </div>
+    <article class="lesson-content">
+        <p>Today we build the bones. HTML is structure — pens, chute, paper record book. Nothing pretty yet.</p>
+        <p>Create a folder named <code>ranch-record</code>. Inside it, a file named exactly <code>index.html</code>.</p>
+
+        <h2>Live result</h2>
+        <p>This is where you'll be at the end of the lesson. Plain on purpose.</p>
+        <div class="preview-wrap">
+            <iframe src="/learn/demo/step1.html" title="Lesson 1 demo" loading="lazy"></iframe>
+        </div>
+
+        <h2>Step 1 — the skeleton</h2>
+        <div class="step"><strong>Type this first.</strong> Every HTML page starts here.</div>
+<pre class="lesson-code"><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Howdy World Ranch — Record Card</title>
+</head>
+<body>
+
+</body>
+</html></pre>
+        <p><code><head></code> is about the page. <code><body></code> is what you see.</p>
+
+        <h2>Step 2 — header and intro</h2>
+        <p>Inside <code><body></code>:</p>
+<pre class="lesson-code"><header>
+  <h1>Howdy World Ranch</h1>
+  <p class="tagline">Livestock Record Card — Fort Worth Stockyards Inspired Herd</p>
+</header>
+
+<main>
+  <section class="intro">
+    <p>
+      These animals are inspired by the famous Fort Worth Herd longhorns
+      that walk Exchange Street twice a day. We're using them as our
+      teaching example while we learn to build tools for the ranch.
+    </p>
+  </section></pre>
+
+        <h2>Step 3 — the herd table</h2>
+<pre class="lesson-code">  <section class="herd">
+    <h2>Current Herd</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Tag</th>
+          <th>Breed</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Black Gold</td><td>FW-01</td><td>Texas Longhorn</td><td>Rare black pattern, 100"+ horns</td></tr>
+        <tr><td>Brutus</td><td>FW-02</td><td>Texas Longhorn</td><td>Largest steer in the example herd</td></tr>
+        <tr><td>McCree</td><td>FW-03</td><td>Texas Longhorn</td><td>Strong presence</td></tr>
+        <tr><td>Blacksmith</td><td>FW-04</td><td>Texas Longhorn</td><td>Newer addition to the drive</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<footer>
+  <p>Howdy World Coding · Lesson 1 — HTML</p>
+</footer></pre>
+        <p>Rows are <code><tr></code>. Header cells are <code><th></code>. Data cells are <code><td></code>.</p>
+
+        <h2>Save and open</h2>
+        <p>Save the file. Double-click it or drag it onto a browser. You should see the ranch name and four animals. If it looks boring, you did it right.</p>
+
+        <div class="lesson-pager">
+            <a href="/learn/00-intro.html">← Intro</a>
+            <a href="/learn.html">All lessons</a>
+            <a href="/learn/02-css.html">Lesson 2 — CSS →</a>
+        </div>
+    </article>
+    <footer>
+        <p>&copy; 2026 Howdy World Coding</p>
+        <div class="social-links"><a href="/learn.html">Learn</a><a href="/support.html">Support</a></div>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const t = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+        }
+        window.onload = () => { const s = localStorage.getItem('theme'); if (s) document.body.setAttribute('data-theme', s); };
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Intro — Howdy World Coding</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <nav class="top-nav">
+        <a href="/">Home</a>
+        <a href="/learn.html">Learn</a>
+        <a href="/support.html">Support</a>
+        <a href="/app/ranch-office-hub.html">Ranch Office Hub</a>
+        <a href="https://youtube.com/@howdy-world-coding" target="_blank">YouTube</a>
+        <a href="https://github.com/zachmofo" target="_blank">GitHub</a>
+    </nav>
+    <div class="lesson-bar">
+        <h1>Lesson 0 — Intro</h1>
+        <p>We're not doing Hello World. We're doing Howdy World.</p>
+    </div>
+    <article class="lesson-content">
+        <p>Howdy. I'm Zach Moffett. I live in North Texas. I work in tech. I grew up around farm and ranch life, and I am <strong>not</strong> a cattleman. I'm a dad who writes software and thinks ag kids get left out of the coding pipeline.</p>
+        <p>Howdy World is a free resource. No paywall. You learn by building tools that would actually make sense on a ranch, a farm, or a homestead — not a fake shopping cart.</p>
+
+        <h2>What we build</h2>
+        <p>One project: a <strong>Ranch Record Card</strong> for a made-up place called Howdy World Ranch. The example herd is inspired by the Fort Worth Stockyards longhorns — Black Gold, Brutus, McCree, and Blacksmith — because a lot of Texans already know those names. Teaching data only.</p>
+
+        <h2>The five layers</h2>
+        <ol>
+            <li>HTML — the pens and the paper (structure)</li>
+            <li>CSS — paint the bulletin board (look)</li>
+            <li>JavaScript — let the page do the math (behavior)</li>
+            <li>JSON — the herd as data (shape)</li>
+            <li>fetch — pull that data in automatically</li>
+        </ol>
+        <p>Same page the whole time. We just add a layer.</p>
+
+        <h2>What you need</h2>
+        <p>A text editor and a browser. Chromebook Text app, Notepad, TextEdit, VS Code — all fine. Make a folder called <code>ranch-record</code>. That's your shop.</p>
+        <p>Videos will match these pages when they're filmed. Until then, walk the text. Type the code. Don't only copy-paste if you can help it.</p>
+
+        <div class="lesson-pager">
+            <a href="/learn.html">All lessons</a>
+            <a href="/learn/01-html.html">Lesson 1 — HTML →</a>
+        </div>
+    </article>
+    <footer>
+        <p>&copy; 2026 Howdy World Coding</p>
+        <div class="social-links">
+            <a href="/learn.html">Learn</a>
+            <a href="/support.html">Support</a>
+        </div>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const t = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+        }
+        window.onload = () => {
+            const s = localStorage.getItem('theme');
+            if (s) document.body.setAttribute('data-theme', s);
+        };
+    </script>
+</body>
+</html>

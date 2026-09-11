@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Howdy World Ranch — Record Card</title>
+  <style>
+    body { font-family: Georgia, "Times New Roman", serif; margin: 0; background: #f3ead3; color: #2b2118; }
+    header { background: #3d2914; color: #f3ead3; text-align: center; padding: 32px 16px; }
+    h1 { margin: 0 0 8px; }
+    .tagline { margin: 0; font-style: italic; }
+    main { max-width: 800px; margin: 0 auto; padding: 24px 16px; }
+    table { width: 100%; border-collapse: collapse; background: #fffaf0; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e2d3b3; }
+    th { background: #6b4f2a; color: #fffaf0; }
+    footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #5c4a3a; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Howdy World Ranch</h1>
+    <p class="tagline">Table built from a JavaScript list</p>
+  </header>
+  <main>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Tag</th><th>Start</th><th>Now</th><th>Gain</th></tr>
+      </thead>
+      <tbody id="herd-body"></tbody>
+    </table>
+  </main>
+  <footer><p>Howdy World Coding · Lesson 4 — JSON</p></footer>
+  <script>
+    var herd = [
+      { "name": "Black Gold", "tag": "FW-01", "startWeight": 1100, "currentWeight": 1280 },
+      { "name": "Brutus", "tag": "FW-02", "startWeight": 1400, "currentWeight": 1520 },
+      { "name": "McCree", "tag": "FW-03", "startWeight": 1200, "currentWeight": 1310 },
+      { "name": "Blacksmith", "tag": "FW-04", "startWeight": 1050, "currentWeight": 1180 }
+    ];
+    var tbody = document.getElementById("herd-body");
+    herd.forEach(function (animal) {
+      var gain = animal.currentWeight - animal.startWeight;
+      tbody.insertAdjacentHTML("beforeend",
+        "<tr><td>" + animal.name + "</td><td>" + animal.tag + "</td><td>" +
+        animal.startWeight + "</td><td>" + animal.currentWeight + "</td><td>" +
+        gain + " lbs</td></tr>"
+      );
+    });
+  </script>
+</body>
+</html>

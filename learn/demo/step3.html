@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Howdy World Ranch — Record Card</title>
+  <style>
+    body { font-family: Georgia, "Times New Roman", serif; margin: 0; background: #f3ead3; color: #2b2118; }
+    header { background: #3d2914; color: #f3ead3; text-align: center; padding: 32px 16px; }
+    h1 { margin: 0 0 8px; }
+    .tagline { margin: 0; font-style: italic; }
+    main { max-width: 800px; margin: 0 auto; padding: 24px 16px; }
+    table { width: 100%; border-collapse: collapse; background: #fffaf0; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e2d3b3; }
+    th { background: #6b4f2a; color: #fffaf0; }
+    button { background: #ffcc00; border: 0; padding: 10px 16px; font-weight: 700; border-radius: 6px; cursor: pointer; }
+    footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #5c4a3a; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Howdy World Ranch</h1>
+    <p class="tagline">Livestock Record Card — click to calculate gain</p>
+  </header>
+  <main>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Tag</th><th>Start</th><th>Now</th><th>Gain</th></tr>
+      </thead>
+      <tbody>
+        <tr data-start="1100" data-current="1280"><td>Black Gold</td><td>FW-01</td><td>1100</td><td>1280</td><td class="gain">—</td></tr>
+        <tr data-start="1400" data-current="1520"><td>Brutus</td><td>FW-02</td><td>1400</td><td>1520</td><td class="gain">—</td></tr>
+        <tr data-start="1200" data-current="1310"><td>McCree</td><td>FW-03</td><td>1200</td><td>1310</td><td class="gain">—</td></tr>
+        <tr data-start="1050" data-current="1180"><td>Blacksmith</td><td>FW-04</td><td>1050</td><td>1180</td><td class="gain">—</td></tr>
+      </tbody>
+    </table>
+    <p><button id="calc-btn" type="button">Calculate gain</button></p>
+  </main>
+  <footer><p>Howdy World Coding · Lesson 3 — JavaScript</p></footer>
+  <script>
+    document.getElementById("calc-btn").addEventListener("click", function () {
+      document.querySelectorAll("tr[data-start]").forEach(function (row) {
+        var start = Number(row.getAttribute("data-start"));
+        var current = Number(row.getAttribute("data-current"));
+        row.querySelector(".gain").textContent = (current - start) + " lbs";
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Howdy World Ranch — Record Card</title>
+  <style>
+    body { font-family: Georgia, "Times New Roman", serif; margin: 0; background: #f3ead3; color: #2b2118; }
+    header { background: #3d2914; color: #f3ead3; text-align: center; padding: 32px 16px; }
+    h1 { margin: 0 0 8px; }
+    .tagline { margin: 0; font-style: italic; }
+    main { max-width: 800px; margin: 0 auto; padding: 24px 16px; }
+    table { width: 100%; border-collapse: collapse; background: #fffaf0; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e2d3b3; }
+    th { background: #6b4f2a; color: #fffaf0; }
+    footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #5c4a3a; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Howdy World Ranch</h1>
+    <p class="tagline">Herd loaded from herd.json with fetch()</p>
+  </header>
+  <main>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Tag</th><th>Breed</th><th>Start</th><th>Now</th><th>Gain</th></tr>
+      </thead>
+      <tbody id="herd-body">
+        <tr><td colspan="6">Loading herd…</td></tr>
+      </tbody>
+    </table>
+  </main>
+  <footer><p>Howdy World Coding · Lesson 5 — fetch</p></footer>
+  <script>
+    fetch("herd.json")
+      .then(function (response) { return response.json(); })
+      .then(function (herd) {
+        var tbody = document.getElementById("herd-body");
+        tbody.innerHTML = "";
+        herd.forEach(function (animal) {
+          var gain = animal.currentWeight - animal.startWeight;
+          tbody.insertAdjacentHTML("beforeend",
+            "<tr><td>" + animal.name + "</td><td>" + animal.tag + "</td><td>" +
+            animal.breed + "</td><td>" + animal.startWeight + "</td><td>" +
+            animal.currentWeight + "</td><td>" + gain + " lbs</td></tr>"
+          );
+        });
+      })
+      .catch(function () {
+        document.getElementById("herd-body").innerHTML =
+          "<tr><td colspan='6'>Could not load the herd file.</td></tr>";
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <meta name="description" content="Free Howdy World coding lessons — Ranch Record Card walkthrough in HTML, CSS, JavaScript, JSON, and fetch.">
+    <title>Learn — Howdy World Coding</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <nav class="top-nav">
+        <a href="/">Home</a>
+        <a href="/learn.html">Learn</a>
+        <a href="/support.html">Support</a>
+        <a href="/app/ranch-office-hub.html">Ranch Office Hub</a>
+        <a href="https://youtube.com/@howdy-world-coding" target="_blank">YouTube</a>
+        <a href="https://github.com/zachmofo" target="_blank">GitHub</a>
+    </nav>
+
+    <header>
+        <div class="hero">
+            <h1>Learn by building</h1>
+            <p class="tagline">Text walkthroughs now. Videos when they're filmed.</p>
+        </div>
+    </header>
+
+    <section class="about">
+        <h2 style="text-align:center;">Project 1 — Ranch Record Card</h2>
+        <p style="text-align:center; max-width:720px; margin:0 auto 1.5rem;">
+            One page. Five layers. We build a livestock record for a made-up place called Howdy World Ranch,
+            using Fort Worth Stockyards longhorns as teaching examples — not as a claim that we own them.
+        </p>
+        <ol class="lesson-list">
+            <li><a href="/learn/00-intro.html"><strong>0. Intro</strong> — why this exists and how the series works</a></li>
+            <li><a href="/learn/01-html.html"><strong>1. The Bones of a Ranch Record</strong> — HTML</a></li>
+            <li><a href="/learn/02-css.html"><strong>2. Paint the Bulletin Board</strong> — CSS</a></li>
+            <li><a href="/learn/03-js.html"><strong>3. Let the Page Do the Math</strong> — JavaScript</a></li>
+            <li><a href="/learn/04-json.html"><strong>4. Your Herd as Data</strong> — JSON</a></li>
+            <li><a href="/learn/05-fetch.html"><strong>5. Pull Data In</strong> — fetch()</a></li>
+        </ol>
+    </section>
+
+    <section>
+        <h2 style="text-align:center; margin-top:0;">Project 2 — Garden Watch</h2>
+        <p class="coming-soon" style="text-align:center;">Coming next season. Same five layers, backyard beds instead of cattle.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Howdy World Coding • <a href="https://howdy-world.com" style="color:var(--accent-yellow);">howdy-world.com</a></p>
+        <p>Made for Texas kids who want to code on the land.</p>
+        <div class="social-links">
+            <a href="https://youtube.com/@howdy-world-coding">YouTube</a>
+            <a href="https://github.com/zachmofo">GitHub</a>
+            <a href="/support.html">Support</a>
+        </div>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) body.setAttribute('data-theme', savedTheme);
+        };
+    </script>
+</body>
+</html>
