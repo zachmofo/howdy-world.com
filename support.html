@@ -1,115 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <meta name="description" content="Support Howdy World Coding — keep free coding lessons available for Texas youth.">
-    <title>Support Howdy World Coding</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support free learning | Howdy World</title>
+  <meta name="description" content="Optional support for free Howdy World coding lessons. Not a tax-deductible charity, and not payment for website or app work.">
+  <link rel="canonical" href="https://howdy-world.com/support.html">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#f3f0ea">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Support free learning",
+    "url": "https://howdy-world.com/support.html",
+    "isPartOf": "https://howdy-world.com/",
+    "description": "Optional support for free Howdy World coding lessons. Not tax-deductible. Not payment for website or app services."
+  }
+  </script>
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-
-    <nav class="top-nav">
-        <a href="/">Home</a>
-        <a href="/learn.html">Learn</a>
-        <a href="/support.html">Support</a>
-        <a href="app/ranch-office-hub.html">Ranch Office Hub</a>
-        <a href="https://youtube.com/@howdy-world-coding" target="_blank">YouTube</a>
-        <a href="https://github.com/zachmofo" target="_blank">GitHub</a>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="wrap mast">
+    <a class="brand" href="/">Howdy World<span>Web &amp; Apps</span></a>
+    <button class="menu-toggle" type="button" aria-controls="navigation" aria-expanded="false">Menu <span aria-hidden="true">＋</span></button>
+    <nav id="navigation" aria-label="Main">
+      <a href="/#work">Work</a>
+      <a href="/#services">Services</a>
+      <a href="/#apps">Apps</a>
+      <a class="nav-cta" href="/#project">Start a project <span aria-hidden="true">↗</span></a>
     </nav>
-
-    <header>
-        <div class="hero">
-            <h1>Keep Howdy World free</h1>
-            <p class="tagline">Lessons stay free. Support is optional.</p>
-        </div>
-    </header>
-
-    <section class="about">
-        <h2 style="text-align:center;">Why this page exists</h2>
-        <p style="font-size:1.2rem; line-height:1.7; text-align:center; max-width:800px; margin:0 auto;">
-            Howdy World is a free coding resource for Texas youth and anyone who works the land.
-            No paywall. No course upsell. If this work is useful, a little support covers the domain, the mic, and the time it takes to film the next lesson.
-        </p>
-        <p style="text-align:center; max-width:800px; margin:1.25rem auto 0; opacity:0.85;">
-            This is not a tax-deductible charity. It’s just a guy in Texas trying to keep the lights on for the next video.
-            If you send something, put <strong>Howdy World</strong> in the note so I know where it came from.
-        </p>
-    </section>
-
-    <section>
-        <h2 style="text-align:center; margin-top:0;">Ways to help</h2>
-        <p style="text-align:center; max-width:640px; margin:0 auto 2rem;">The free option is still the best one: share a lesson with a kid who would actually use it.</p>
-
-        <div class="give-grid">
-            <article class="give-card">
-                <h3>Share it</h3>
-                <p>Send the channel to a 4-H family, a homeschool group, or a shop teacher. That helps more than a dollar.</p>
-                <a class="cta give-btn" href="https://youtube.com/@howdy-world-coding" target="_blank" rel="noopener">YouTube channel</a>
-            </article>
-
-            <article class="give-card">
-                <h3>Venmo</h3>
-                <p>Easiest for most folks in Texas.</p>
-                <p class="give-soon" style="color:inherit;">@Zachmoffett</p>
-                <a class="cta give-btn" href="https://venmo.com/u/Zachmoffett" target="_blank" rel="noopener">Pay with Venmo</a>
-            </article>
-
-            <article class="give-card">
-                <h3>Cash App</h3>
-                <p>Good backup if Venmo isn’t your thing.</p>
-                <p class="give-soon" style="color:inherit;">$ZachMoffett</p>
-                <a class="cta give-btn" href="https://cash.app/$ZachMoffett" target="_blank" rel="noopener">Pay with Cash App</a>
-            </article>
-
-            <article class="give-card">
-                <h3>PayPal</h3>
-                <p>Best for people outside the usual Venmo/Cash App circle.</p>
-                <p class="give-soon" style="color:inherit;">@zachmoffett</p>
-                <a class="cta give-btn" href="https://paypal.me/zachmoffett" target="_blank" rel="noopener">Pay with PayPal</a>
-            </article>
-
-            <article class="give-card">
-                <h3>Bitcoin</h3>
-                <p>Bitcoin network only. Do not send Bitcoin Cash, ETH, or anything else — it will be lost.</p>
-                <p class="btc-address" id="btc-address">3BrYKKNQQe9MrnRTyje4fgp4QvmzuiqjYV</p>
-                <button type="button" class="cta give-btn" onclick="copyBtc()">Copy address</button>
-            </article>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Howdy World Coding • <a href="https://howdy-world.com" style="color:var(--accent-yellow);">howdy-world.com</a></p>
-        <p>Made for Texas kids who want to code on the land.</p>
-        <div class="social-links">
-            <a href="https://youtube.com/@howdy-world-coding">YouTube</a>
-            <a href="https://github.com/zachmofo">GitHub</a>
-            <a href="/support.html">Support</a>
-        </div>
-    </footer>
-
-    <script>
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-        function copyBtc() {
-            const addr = document.getElementById('btc-address').textContent.trim();
-            navigator.clipboard.writeText(addr).then(() => {
-                alert('Bitcoin address copied');
-            });
-        }
-        window.onload = () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.setAttribute('data-theme', savedTheme);
-            }
-        };
-    </script>
+  </header>
+  <main class="wrap support-main" id="main">
+    <p class="eyebrow">The learning side of Howdy World</p>
+    <h1>Keep the learning side <em>free.</em></h1>
+    <p class="lede">Howdy World’s coding lessons are still here. Sharing a lesson—or making an optional contribution—helps support that free resource.</p>
+    <h2>A little help goes a long way.</h2>
+    <p>Howdy World is a free coding resource for Texas youth and anyone who works the land. No paywall. No course upsell. If this work is useful, a little support covers the domain, the mic, and the time it takes to film the next lesson.</p>
+    <p>The free option is still the best one: share a lesson with a kid who would actually use it. Send the channel to a 4-H family, a homeschool group, or a shop teacher.</p>
+    <div class="actions">
+      <a class="button" href="/learn.html">Explore free coding lessons</a>
+      <a class="text-link" href="https://youtube.com/@howdy-world-coding">Visit the YouTube channel</a>
+    </div>
+    <h2>Optional support. Separate purpose.</h2>
+    <p>Support is for the free learning resource—not a payment for website or app services. Contributions are not tax-deductible charitable donations.</p>
+    <div class="support-note">
+      <strong>This is not a tax-deductible charity.</strong>
+      <p>It’s just a guy in Texas trying to keep the lights on for the next video. If you send something, put <strong>Howdy World</strong> in the note so I know where it came from.</p>
+    </div>
+    <div class="give-grid">
+      <article class="give-card">
+        <h3>Share it</h3>
+        <p>Send the channel to a 4-H family, a homeschool group, or a shop teacher. That helps more than a dollar.</p>
+        <a class="button" href="https://youtube.com/@howdy-world-coding">YouTube channel</a>
+      </article>
+      <article class="give-card">
+        <h3>Venmo</h3>
+        <p>Easiest for most folks in Texas.</p>
+        <p class="small">@Zachmoffett</p>
+        <a class="button" href="https://venmo.com/u/Zachmoffett">Pay with Venmo</a>
+      </article>
+      <article class="give-card">
+        <h3>Cash App</h3>
+        <p>Good backup if Venmo isn’t your thing.</p>
+        <p class="small">$ZachMoffett</p>
+        <a class="button" href="https://cash.app/$ZachMoffett">Pay with Cash App</a>
+      </article>
+      <article class="give-card">
+        <h3>PayPal</h3>
+        <p>Best for people outside the usual Venmo/Cash App circle.</p>
+        <p class="small">@zachmoffett</p>
+        <a class="button" href="https://paypal.me/zachmoffett">Pay with PayPal</a>
+      </article>
+      <article class="give-card">
+        <h3>Bitcoin</h3>
+        <p>Bitcoin network only. Do not send Bitcoin Cash, ETH, or anything else — it will be lost.</p>
+        <p class="btc-address" id="btc-address">3BrYKKNQQe9MrnRTyje4fgp4QvmzuiqjYV</p>
+        <button class="button" type="button" id="copy-btc">Copy address</button>
+        <p class="small" id="btc-status" role="status"></p>
+      </article>
+    </div>
+    <h2>Need something for your business?</h2>
+    <p>That’s a different conversation, and this website does not take project requests yet.</p>
+    <a class="text-link" href="/#project">Read the project note</a>
+  </main>
+  <footer>
+    <div class="wrap footer-top">
+      <div>
+        <a class="brand" href="/">Howdy World<span>Web &amp; Apps</span></a>
+        <p>Good work starts with a hello.</p>
+      </div>
+      <div>
+        <h2>Build something</h2>
+        <a href="/#work">Sample websites</a>
+        <a href="/#apps">Practical web apps</a>
+        <a href="/#project">Start a project</a>
+      </div>
+      <div>
+        <h2>The learning side</h2>
+        <a href="/support.html">Support free learning</a>
+        <a href="/learn.html">Free coding lessons</a>
+        <a href="/app/ranch-office-hub.html">Ranch Office Hub</a>
+        <a href="https://github.com/zachmofo">GitHub</a>
+        <a href="https://youtube.com/@howdy-world-coding">YouTube</a>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <p>© 2026 Howdy World</p>
+      <p>Support keeps lessons free. It is not tax-deductible and not payment for website or app work.</p>
+    </div>
+  </footer>
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>
