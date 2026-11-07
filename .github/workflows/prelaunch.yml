@@ -1,0 +1,19 @@
+name: Prelaunch checks
+
+on:
+  pull_request:
+
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch main for the preservation diff
+        run: git fetch origin main:refs/remotes/origin/main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Static prelaunch checks
+        run: python3 tests/prelaunch_check.py
