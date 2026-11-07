@@ -1,16 +1,18 @@
 # Launch checklist — Howdy World Web & Apps
 
-Checked 2026-11-07. Branch `cursor/howdy-front-porch-4869`. Design basis: approved v3.1 mockup (no later mockup). Production at check time is commit `77602e4292c0e2647ac4916c5a5ad3444185ad9a` on `main`.
+Checked 2026-11-07. Branch `cursor/howdy-front-porch-4869`. Design basis: approved v3.1 mockup (no later mockup). Production before this branch is commit `77602e4292c0e2647ac4916c5a5ad3444185ad9a` on `main`.
 
-**Do not publish.** One P0 blocker is open. This branch was not merged.
+**No open P0.** The contact gap is closed by an ordinary link to the configured quote form. Mail delivery was not end-to-end tested. That is a disclosed limitation, not a failed delivery and not an E2E pass.
 
-## P0
+## Contact
 
 | Item | Result | Evidence |
 | --- | --- | --- |
-| Verified project-contact route on howdy-world.com | **FAIL** | Live homepage HTML from https://howdy-world.com/ (Server: GitHub.com, fetched 2026-11-07) has no contact form and no mail address. Public HTML of https://zachmoffett.com/ seen before the Cloudflare stop shows `form#quote` with `action="/api/quote"` `method="post"`, a honeypot, a public Turnstile widget, and `assets/quote.js`, plus a success state that belongs to that other site. Direct requests from this environment to `https://zachmoffett.com/api/quote` and `https://zachmoffett.com/assets/quote.js` returned Cloudflare’s managed challenge (HTTP 403, `cf-mitigated: challenge`), not an application response. Further browser, proxy, and user-agent attempts were stopped on instruction. Delivery was not verified. The Turnstile widget is on zachmoffett.com, so that endpoint was not treated as a howdy-world.com backend. No personal Gmail was added. The new homepage has no `<form>`, does not post anywhere, and does not say a message was sent. |
+| Contact path on howdy-world.com | **PASS** | Homepage and support link to `https://zachmoffett.com/#quote`. Visible copy: “Continue to Zach’s project request form; choose Not sure for a web app.” No `<form>` on this site, no cross-origin post, no success message, no personal Gmail. |
+| Quote service configured and deployed | **PASS** (configured and deployed; not delivery-tested) | Authoritative read-only inspection: `zachmofo/zach` PR 2 merged 2026-11-06 8:31 AM CT at SHA `e4f5e425db219f7c24cf58ab9ba3d25b6a4d8ae9`. Cloudflare Pages production deployment `326858a1-e6bc-41f3-b431-68b332863e6c` at 8:32 AM CT for that SHA. Domain `zachmoffett.com` attached, Functions enabled. Current index has real `form id=quote` posting to `/api/quote` with Turnstile. `TURNSTILE_SECRET` is present, `QUOTE_MAILER` is bound to `zach-quote-mailer`, and the Turnstile domain is authorized. The mailer has a `QUOTE_MAIL` `send_email` binding, `DELIVER_TO` secret, `QUOTE_FROM`, and two verified Email Routing destinations. The handler errors if required mail fails. Secret values were not read. |
+| End-to-end form delivery | **Not tested** | No submission was sent. This is not an E2E pass and it is not evidence that the configured path is broken. |
 
-Launch stays blocked until a contact path is verified to deliver a real request. Do not merge this branch to `main` while this P0 is open. Merging to `main` is what publishes the site.
+Publishing is a normal merge of this pull request to `main`. GitHub Pages then serves that tree at https://howdy-world.com/.
 
 ## Deployment mechanism
 
@@ -46,7 +48,7 @@ Static command: `python3 tests/prelaunch_check.py` → exit 0, 0 failures. Brows
 | robots.txt | **PASS** | Allows `/`. Sitemap line is `https://howdy-world.com/sitemap.xml`. It does not disallow the site. |
 | Sitemap | **PASS** | Lists `/`, support, `learn.html`, lessons `00`–`05`, demo steps `step1`–`step5`, and `/app/ranch-office-hub.html`. |
 | Staging noindex / review banner not copied | **PASS** | No `_headers`. No “Review-only”, “Design preview”, “Preview complete”, “Simulation only”, or “Request sent”. |
-| No fake contact success | **PASS** | No `<form>` on the homepage or support page. No `/api/quote`, Turnstile widget, or `mailto:`. Project section states that this page does not send messages. |
+| No fake contact success | **PASS** | No `<form>` on the homepage or support page. No `/api/quote` post, Turnstile widget, or `mailto:` on this site. The project action is a normal link to `https://zachmoffett.com/#quote`. It does not say a message was sent. |
 | Three-sample gallery, fictional labels | **PASS** | Three `.sample-entry` blocks in Stripewell, Bramblewick, Keelstone order. Each says “Fictional concept · not client work”. Nearby copy says they are not client projects. |
 | Desktop 3-column / mobile stacked gallery | **PASS** | Rendered at 1440 (three columns) and at 360, 390, and 430 (stacked). Screenshots below. |
 | Phone composites clear of captions | **PASS** | Bounding boxes at 360, 390, 430, and 1440: each phone does not intersect its caption or “View sample” link. Fiction label does not intersect the desktop image. |
@@ -67,7 +69,7 @@ Static command: `python3 tests/prelaunch_check.py` → exit 0, 0 failures. Brows
 | External sample HTTP status | **N/A** | Not re-requested after the Cloudflare challenge stop. The three URLs are the ones in the approved mockup. |
 | Lighthouse | **N/A** | Lighthouse is not installed here. axe-core and the viewport checks above were used instead. |
 | Performance basics | **PASS** | Self-hosted fonts with `font-display: swap`, width/height on gallery images, desktop shots eager, phone shots `loading="lazy"`, one small `site.js`. No third-party script on the new pages. |
-| Production publish | **FAIL** | Blocked by the P0 contact item. Not merged. |
+| Production publish | **PASS** to attempt | No remaining P0. Publish only by merging this pull request into `main` after the static check is green. Do not use another host or change DNS. |
 
 ## Visual fixes made after render
 

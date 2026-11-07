@@ -5,6 +5,7 @@ html{color-scheme:light;}
 .fiction-tag{position:static;top:auto;left:auto;right:auto;min-height:0;}
 .project-hold{border-left:3px solid var(--rust);padding-left:18px;}
 .project-hold h3{font-size:32px;margin-bottom:16px;}
+.project-hold .button{max-width:36ch;height:auto;white-space:normal;line-height:1.45;align-items:flex-start;}
 .project-hold p{max-width:42ch;}
 .give-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:28px;}
 .give-card{background:#fffcf7;border:1px solid var(--line);padding:18px 18px 20px;}

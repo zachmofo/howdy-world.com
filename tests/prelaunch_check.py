@@ -153,6 +153,17 @@ def main() -> int:
     else:
         fail(f"form count index={index.forms} support={support.forms}")
 
+    quote_url = "https://zachmoffett.com/#quote"
+    quote_copy = "Continue to Zach’s project request form; choose Not sure for a web app."
+    if quote_url in index_text and quote_url in support_text and quote_copy in index_text and quote_copy in support_text:
+        ok("project actions link to the configured zachmoffett.com quote form")
+    else:
+        fail("configured quote link or instruction is missing")
+    if "does not send messages" in index_text or "does not take project requests" in support_text:
+        fail("dead-end contact copy remains")
+    else:
+        ok("dead-end contact copy is gone")
+
     order = [index_text.find(name) for name in ("stripewell", "bramblewick", "keelstone")]
     if index_text.count("sample-entry") == 3 and order[0] < order[1] < order[2] and -1 not in order:
         ok("three samples are grouped in Stripewell, Bramblewick, Keelstone order")
