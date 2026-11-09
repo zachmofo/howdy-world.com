@@ -132,11 +132,8 @@ def main() -> int:
         "Preview complete",
         "Simulation only",
         "has not sent",
-        "Request sent",
         "mailto:",
         "gmail.com",
-        "/api/quote",
-        "cf-turnstile",
         "testimonial",
     ]
     for label, text in (("index", index_text), ("support", support_text), ("404", missing_text)):
@@ -148,35 +145,67 @@ def main() -> int:
         else:
             ok(f"{label} has no mockup banner, fake success, or invented mail")
 
-    if index.forms == 0 and support.forms == 0:
-        ok("no project or support form element")
+    if index.forms == 1 and support.forms == 0:
+        ok("homepage has one quote form and support has none")
     else:
         fail(f"form count index={index.forms} support={support.forms}")
 
-    quote_url = "https://zachmoffett.com/#quote"
-    quote_copy = "Continue to Zach’s project request form; choose Not sure for a web app."
-    if quote_url in index_text and quote_url in support_text and quote_copy in index_text and quote_copy in support_text:
-        ok("project actions link to the configured zachmoffett.com quote form")
+    quote_action = 'action="https://zachmoffett.com/api/quote"'
+    if quote_action in index_text and 'method="post"' in index_text and 'name="source" value="howdy-world"' in index_text:
+        ok("quote form posts to zachmoffett.com and tags howdy-world")
     else:
-        fail("configured quote link or instruction is missing")
+        fail("quote form action, method, or source is wrong")
+    required_fields = ("name", "email", "business", "location", "tier", "message", "company_website")
+    missing_fields = [name for name in required_fields if f'name="{name}"' not in index_text]
+    tier_options = all(option in index_text for option in ("Basic", "Standard", "Premium", "Not sure"))
+    if not missing_fields and tier_options and "Select a tier" in index_text:
+        ok("quote form keeps the zach field names and tiers")
+    else:
+        fail(f"quote fields missing: {missing_fields}")
+    if "0x4AAAAAAFtp7kxdG920BkRZ" in index_text and "api.js?render=explicit" in index_text:
+        ok("Turnstile uses the existing sitekey and explicit render")
+    else:
+        fail("Turnstile sitekey or explicit render is missing")
+    quote_js = read("assets/quote.js")
+    if (
+        "turnstile.render" in quote_js
+        and 'response-field-name": "cf-turnstile-response"' in quote_js
+        and "event.preventDefault()" in quote_js
+        and "HTMLFormElement.prototype.submit.call(form)" in quote_js
+        and "resetWidget()" in quote_js
+    ):
+        ok("quote script renders Turnstile, blocks a tokenless submit, then navigates")
+    else:
+        fail("quote script is missing the explicit-render submit guard")
+    success_at = index_text.find('id="quote-success"')
+    success_tag = index_text[success_at:success_at + 80] if success_at != -1 else ""
+    before_success = index_text[:success_at] if success_at != -1 else index_text
+    if success_at != -1 and "hidden" in success_tag and "Request sent." not in before_success and 'sent === "1"' in index_text:
+        ok("confirmation copy stays hidden unless the server returns sent=1")
+    else:
+        fail("confirmation copy is not gated on the server redirect")
+    if "/#quote" in support_text and "https://zachmoffett.com/#quote" not in support_text:
+        ok("support project links point at the homepage quote form")
+    else:
+        fail("support still sends project requests away from the homepage form")
     if "does not send messages" in index_text or "does not take project requests" in support_text:
         fail("dead-end contact copy remains")
     else:
         ok("dead-end contact copy is gone")
 
     order = [index_text.find(name) for name in ("stripewell", "bramblewick", "keelstone")]
-    if index_text.count("sample-entry") == 3 and order[0] < order[1] < order[2] and -1 not in order:
+    if all(index_text.count(f"card-{name}") == 1 for name in ("lawn", "bake", "keel")) and order[0] < order[1] < order[2]:
         ok("three samples are grouped in Stripewell, Bramblewick, Keelstone order")
     else:
         fail(f"sample gallery order/count is wrong: {order}")
 
-    if index_text.count("Fictional concept · not client work") == 3 and "not client projects" in index_text:
+    if index_text.count("· fictional") >= 3 and "fictional businesses" in index_text and "Not client projects." in index_text:
         ok("fictional labels are on the gallery")
     else:
         fail("fictional labels are missing")
 
-    if "not claims of shipped apps" in index_text and "Ranch Office Hub" in index_text:
-        ok("apps stay potential ideas and Ranch Office Hub keeps its URL")
+    if "Not shipped client work" in index_text and "Ranch Office Hub" in index_text:
+        ok("apps stay examples and Ranch Office Hub keeps its URL")
     else:
         fail("apps disclaimer or Ranch Office Hub link is missing")
 
@@ -306,10 +335,20 @@ def main() -> int:
     else:
         fail("motion or focus CSS is missing")
 
+    home_css = read("assets/home.css")
+    if "Fraunces" in home_css and "Figtree" in home_css and 'url("fonts/' in home_css:
+        ok("homepage fonts resolve from /assets/home.css")
+    else:
+        fail("homepage font URLs would 404")
+    if "prefers-reduced-motion" in home_css and "focus-visible" in home_css and "#245c4a" in home_css:
+        ok("homepage keeps the Howdy green, focus, and reduced motion")
+    else:
+        fail("homepage accent, focus, or motion CSS is missing")
+
     ids = index.ids
-    needed = ["hero", "work", "services", "apps", "project"]
-    if all(name in ids for name in needed) and ids.index("work") < ids.index("services"):
-        ok("gallery comes before services")
+    needed = ["hero", "work", "apps", "contact", "quote"]
+    if all(name in ids for name in needed) and ids.index("work") < ids.index("apps") < ids.index("quote"):
+        ok("gallery comes before apps and the quote form")
     else:
         fail(f"section ids are {ids}")
 

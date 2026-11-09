@@ -1,0 +1,854 @@
+/* Howdy World home. Same editorial system as zachmoffett.com, with the Howdy green. */
+
+@font-face {
+    font-family: Fraunces;
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("fonts/fraunces-500.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: Fraunces;
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/fraunces-italic.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: Figtree;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/figtree-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: Figtree;
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("fonts/figtree-600.woff2") format("woff2");
+}
+
+body.home {
+    margin: 0;
+    background: #f3f0ea;
+    color: #1c1916;
+    font-family: Figtree, "Segoe UI", sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    color-scheme: light;
+}
+
+.home *,
+.home *::before,
+.home *::after {
+    box-sizing: border-box;
+}
+
+.home img {
+    max-width: 100%;
+    padding: 0;
+    height: auto;
+}
+
+.home ::selection {
+    background: #e7d3b0;
+    color: #1c1916;
+}
+
+.home .wrap {
+    width: min(1160px, calc(100% - 2.5rem));
+    margin-inline: auto;
+    padding-top: 0.75rem;
+}
+
+.home .skip {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    transform: translateY(-160%);
+    background: #1c1916;
+    color: #f3f0ea;
+    text-decoration: none;
+    padding: 0.65rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 8px;
+    z-index: 5;
+    font-weight: 600;
+}
+
+.home .skip:focus {
+    transform: none;
+}
+
+.home .mast {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    padding: 0.25rem 0 0.5rem;
+}
+
+.home .mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 44px;
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    flex: none;
+}
+
+.home .mark svg {
+    width: 32px;
+    height: 32px;
+    flex: none;
+}
+
+.home .mark-name {
+    display: block;
+    line-height: 1.05;
+    white-space: nowrap;
+}
+
+.home .mark small {
+    display: block;
+    margin-top: 0.18rem;
+    font-family: Figtree, "Segoe UI", sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #245c4a;
+}
+
+.home .mast nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.15rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.home .mast nav li {
+    display: block;
+    margin: 0;
+}
+
+.home .mast nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.8rem;
+    color: #1c1916;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.home .mast nav a:hover,
+.home .mast nav a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+}
+
+.home a:focus-visible,
+.home button:focus-visible,
+.home input:focus-visible,
+.home select:focus-visible,
+.home textarea:focus-visible {
+    outline: 2px solid #1c1916;
+    outline-offset: 3px;
+}
+
+.home main:focus {
+    outline: none;
+}
+
+.home main:focus-visible {
+    outline: 2px solid #1c1916;
+    outline-offset: 4px;
+}
+
+.home .eyebrow {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #5c564c;
+}
+
+.home h1,
+.home h2,
+.home h3 {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+}
+
+.home h1 {
+    margin: 0.55rem 0 0;
+    font-size: clamp(2.6rem, 6.4vw, 5.15rem);
+}
+
+.home h1 em,
+.home h2 em {
+    font-style: italic;
+    font-weight: 400;
+    color: #245c4a;
+    letter-spacing: -0.035em;
+}
+
+.home .intro-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 1.75rem;
+}
+
+.home .lede {
+    margin: 0 0 0.8rem;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    max-width: 38rem;
+}
+
+.home .intro-copy p:last-child {
+    margin: 0;
+    max-width: 38rem;
+    color: #3f3a34;
+}
+
+.home .tiers-kicker {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5c564c;
+}
+
+.home .tiers {
+    margin: 0;
+}
+
+.home .tiers div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1rem;
+    align-items: baseline;
+    border-bottom: 1px solid #e0d8ce;
+    padding: 0.45rem 0 0.15rem;
+}
+
+.home .tiers dt {
+    margin: 0;
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+}
+
+.home .tiers dd {
+    margin: 0;
+}
+
+.home .tiers .scope {
+    color: #5c564c;
+    font-size: 0.92rem;
+    text-align: right;
+}
+
+.home .tiers .quote {
+    grid-column: 1 / -1;
+}
+
+.home .tiers .quote a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.2rem 0 0.35rem;
+    font-weight: 600;
+    color: #245c4a;
+    text-underline-offset: 0.18em;
+}
+
+.home .vh {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.home .work {
+    margin-top: clamp(3.5rem, 8vw, 6rem);
+}
+
+.home .work-head {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.home h2 {
+    margin: 0.4rem 0 0;
+    font-size: clamp(2.05rem, 4.5vw, 3.55rem);
+    max-width: 14ch;
+}
+
+.home .work-note {
+    margin: 0;
+    color: #5c564c;
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+.home .cards {
+    display: grid;
+    gap: 2.75rem;
+}
+
+.home .card {
+    width: auto;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    display: block;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.home .card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 18px;
+}
+
+.home .card-link:focus-visible {
+    outline-offset: 6px;
+}
+
+.home .stage {
+    position: relative;
+    padding-bottom: 4.25rem;
+}
+
+.home .browser {
+    background: #f7f4ef;
+    border: 1px solid #e3dcd2;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(48, 38, 26, 0.1), 0 1px 2px rgba(48, 38, 26, 0.06);
+}
+
+.home .chrome {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 12px;
+    background: #f7f4ef;
+}
+
+.home .chrome span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e4ddd3;
+}
+
+.home .chrome span:nth-child(1) { background: #e3b2a8; }
+.home .chrome span:nth-child(2) { background: #ead7a4; }
+.home .chrome span:nth-child(3) { background: #c5d4b4; }
+
+.home .screen {
+    position: relative;
+    overflow: hidden;
+    background: #e6dfd6;
+}
+
+.home .screen-desk { aspect-ratio: 1120 / 700; }
+.home .screen-phone { aspect-ratio: 480 / 854; }
+
+.home .screen img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: top center;
+    padding: 0;
+}
+
+.home .phone {
+    position: absolute;
+    right: 5%;
+    bottom: 0;
+    width: 36%;
+    padding: 7px;
+    background: #161513;
+    border-radius: 22px;
+    box-shadow: 0 16px 32px rgba(22, 21, 19, 0.32);
+}
+
+.home .phone .screen {
+    border-radius: 15px;
+}
+
+.home .tier {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 1.05rem 0 0.75rem;
+}
+
+.home .dots {
+    display: inline-flex;
+    align-items: center;
+}
+
+.home .dots i {
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 0 0 0 2px #f3f0ea;
+}
+
+.home .dots i + i { margin-left: -0.28rem; }
+
+.home .card-lawn { --bullet: #2f7d45; }
+.home .card-lawn .dots i:first-child { background: #143528; }
+.home .card-lawn .dots i:last-child { background: #c6f36b; }
+
+.home .card-bake { --bullet: #9a4220; }
+.home .card-bake .dots i:first-child { background: #4a221c; }
+.home .card-bake .dots i:last-child { background: #e0a07a; }
+
+.home .card-keel { --bullet: #8d6a33; }
+.home .card-keel .dots i:first-child { background: #1c1916; }
+.home .card-keel .dots i:last-child { background: #d4b483; }
+
+.home .pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.85rem;
+    padding: 0.2rem 0.75rem;
+    border: 1px solid #d5cdc2;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.home .card h3 {
+    margin: 0;
+    font-size: clamp(1.7rem, 2vw, 2rem);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+}
+
+.home .kind {
+    margin: 0.35rem 0 0.85rem;
+    color: #5c564c;
+}
+
+.home .card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.home .card li {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    margin: 0.38rem 0;
+    line-height: 1.4;
+}
+
+.home .card li::before {
+    content: "";
+    width: 0.48rem;
+    height: 0.48rem;
+    margin-top: 0.42rem;
+    border-radius: 2px;
+    background: var(--bullet);
+    flex: none;
+}
+
+.home .more {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 0.45rem;
+    font-weight: 600;
+    color: #245c4a;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+}
+
+.home .card-link:hover .more,
+.home .card-link:focus-visible .more,
+.home .more:hover,
+.home .more:focus-visible {
+    text-decoration-thickness: 2px;
+}
+
+.home .disclaimer {
+    margin: 2rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid #e0d8ce;
+    color: #5c564c;
+    font-size: 0.92rem;
+}
+
+.home .contact {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: clamp(3.5rem, 8vw, 5.5rem);
+    padding-top: 1.75rem;
+    border-top: 1px solid #e0d8ce;
+}
+
+.home .contact h2 {
+    max-width: 12ch;
+}
+
+.home .contact-copy p:last-child,
+.home .apps p {
+    margin: 0.85rem 0 0;
+    max-width: 34rem;
+}
+
+.home .apps .kind {
+    margin-top: 0.85rem;
+}
+
+.home .colophon {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.4rem 1.5rem;
+    margin: 2.5rem 0 1.75rem;
+    padding: 1rem 0 0;
+    border-top: 1px solid #e0d8ce;
+    background: transparent;
+    color: #5c564c;
+    text-align: left;
+    width: auto;
+    font-size: 0.88rem;
+}
+
+.home .colophon p {
+    margin: 0;
+}
+
+.home .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 1rem;
+}
+
+.home .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: inherit;
+    text-underline-offset: 0.18em;
+}
+
+@media (min-width: 880px) {
+    .home .intro-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 3.5rem;
+        align-items: end;
+    }
+
+    .home .work-head {
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: 2rem;
+    }
+
+    .home h2 {
+        max-width: none;
+    }
+
+    .home .work-note {
+        text-align: right;
+        padding-bottom: 0.35rem;
+    }
+
+    .home .contact {
+        grid-template-columns: minmax(14rem, 0.72fr) minmax(18rem, 1.28fr);
+        align-items: start;
+        gap: 3rem;
+    }
+
+    .home .contact h2 {
+        max-width: 11ch;
+    }
+}
+
+@media (min-width: 1040px) {
+    .home .cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.6rem;
+        align-items: start;
+    }
+
+    .home .stage {
+        padding-bottom: 3.15rem;
+    }
+
+    .home .phone {
+        width: 34%;
+        border-radius: 16px;
+        padding: 5px;
+    }
+
+    .home .phone .screen {
+        border-radius: 11px;
+    }
+
+    .home .chrome {
+        height: 28px;
+    }
+
+    .home .card h3 {
+        font-size: 1.72rem;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .home .stage {
+        transition: transform 0.25s ease;
+    }
+
+    .home .card-link:hover .stage,
+    .home .card-link:focus-visible .stage {
+        transform: translateY(-4px);
+    }
+}
+
+@media (max-width: 640px) {
+    .home .mast {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        row-gap: 0.1rem;
+    }
+
+    .home .mast nav {
+        flex-basis: 100%;
+    }
+
+    .home .mast nav ul {
+        justify-content: flex-start;
+    }
+
+    .home .mast nav a {
+        padding-left: 0;
+        padding-right: 1.15rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .home .wrap {
+        width: min(1160px, calc(100% - 2rem));
+    }
+
+    .home h1 {
+        font-size: 2.45rem;
+    }
+}
+
+.home .quote-form {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+}
+
+.home .field {
+    display: grid;
+    gap: 0.28rem;
+}
+
+.home .field label {
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.home .quote-form input,
+.home .quote-form select,
+.home .quote-form textarea {
+    width: 100%;
+    margin: 0;
+    min-height: 44px;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid #d5cdc2;
+    border-radius: 2px;
+    background: #fffcf8;
+    color: #1c1916;
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.home .quote-form textarea {
+    min-height: 8.5rem;
+    resize: vertical;
+}
+
+.home .quote-form select {
+    appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, #1c1916 50%),
+        linear-gradient(135deg, #1c1916 50%, transparent 50%);
+    background-position:
+        calc(100% - 1.15rem) 55%,
+        calc(100% - 0.75rem) 55%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 2rem;
+}
+
+.home .quote-form input[aria-invalid="true"],
+.home .quote-form select[aria-invalid="true"],
+.home .quote-form textarea[aria-invalid="true"] {
+    border-color: #8a2a22;
+}
+
+.home .field-error {
+    margin: 0;
+    color: #8a2a22;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.home .field-error:empty,
+.home .form-status:empty {
+    display: none;
+}
+
+.home .quote-form button {
+    width: 100%;
+    margin: 0.15rem 0 0;
+    min-height: 44px;
+    padding: 0.65rem 1.1rem;
+    border: 0;
+    border-radius: 2px;
+    background: #1c1916;
+    color: #f3f0ea;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.home .quote-form button:hover {
+    background: #3a342c;
+}
+
+.home .quote-form button:disabled {
+    cursor: wait;
+    opacity: 0.72;
+}
+
+.home .hp {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.home .form-status,
+.home .return-note {
+    margin: 0;
+    color: #8a2a22;
+    font-weight: 600;
+}
+
+.home .return-note p {
+    display: none;
+    margin: 0;
+}
+
+.home .turnstile-note {
+    margin: 0;
+    color: #5c564c;
+    font-size: 0.92rem;
+}
+
+.home .turnstile.is-on {
+    min-height: 65px;
+}
+
+.home .form-success {
+    margin: 0;
+}
+
+.home .form-success h3 {
+    margin: 0 0 0.55rem;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+}
+
+.home .form-success p {
+    margin: 0;
+    max-width: 28rem;
+}
+
+html.quote-sent .home #quote-success[hidden] {
+    display: block !important;
+}
+
+html.quote-sent .home #quote {
+    display: none !important;
+}
+
+html.quote-failed .home #quote-return[hidden] {
+    display: block !important;
+}
+
+html.quote-failed.reason-spam .home #quote-return [data-reason="spam"],
+html.quote-failed.reason-rate .home #quote-return [data-reason="rate"],
+html.quote-failed.reason-send .home #quote-return [data-reason="send"],
+html.quote-failed.reason-setup .home #quote-return [data-reason="setup"],
+html.quote-failed.reason-fields .home #quote-return [data-reason="fields"],
+html.quote-failed.reason-read .home #quote-return [data-reason="read"] {
+    display: block;
+}
