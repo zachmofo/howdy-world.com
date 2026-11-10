@@ -456,6 +456,10 @@ body.home {
 .home .card-keel .dots i:first-child { background: #1c1916; }
 .home .card-keel .dots i:last-child { background: #d4b483; }
 
+.home .card-menu { --bullet: #1c3429; }
+.home .card-menu .dots i:first-child { background: #12241c; }
+.home .card-menu .dots i:last-child { background: #f3d56a; }
+
 .home .pill {
     display: inline-flex;
     align-items: center;
@@ -554,6 +558,54 @@ body.home {
     margin-top: 0.85rem;
 }
 
+.home .apps .cards {
+    margin-top: 1.75rem;
+    max-width: 34rem;
+}
+
+.home .apps .card p {
+    max-width: none;
+}
+
+.home .apps .card .tier {
+    margin: 1.05rem 0 0.75rem;
+}
+
+.home .apps .card .card-line {
+    margin: 0.35rem 0 0.55rem;
+    max-width: none;
+    color: #1c1916;
+}
+
+.home .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 1.25rem;
+    row-gap: 0.1rem;
+    max-width: 100%;
+}
+
+.home .owner-action {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.7rem;
+    max-width: 100%;
+}
+
+.home .card-actions .more {
+    margin-top: 0;
+}
+
+.home .pin {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+    color: #1c1916;
+}
+
 .home .colophon {
     display: flex;
     flex-wrap: wrap;
@@ -648,6 +700,10 @@ body.home {
     .home .card h3 {
         font-size: 1.72rem;
     }
+
+    .home .apps .cards {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -656,7 +712,9 @@ body.home {
     }
 
     .home .card-link:hover .stage,
-    .home .card-link:focus-visible .stage {
+    .home .card-link:focus-visible .stage,
+    .home .card-menu:hover .stage,
+    .home .card-menu:focus-within .stage {
         transform: translateY(-4px);
     }
 }
