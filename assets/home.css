@@ -460,6 +460,10 @@ body.home {
 .home .card-menu .dots i:first-child { background: #12241c; }
 .home .card-menu .dots i:last-child { background: #f3d56a; }
 
+.home .card-menu .stage {
+    margin-top: 1.5rem;
+}
+
 .home .pill {
     display: inline-flex;
     align-items: center;
